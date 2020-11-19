@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .redFont {
+            color: red;
+        }
+    </style>
+</head>
+
+<div id="app">
+    <ul>
+        <li :class="{redFont:index == redFontIndex}" v-for="(movie, index) in movies" v-on:click="selectFontColor(index)">{{movie}}</li>
+    </ul>
+</div>
+
+<body>
+    <script src="../../assets/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                movies: ['海王','海尔兄弟','火影忍者','进击的巨人'],
+                redFontIndex: -1
+            },
+            methods: {
+                selectFontColor: function(index) {
+                    this.redFontIndex = index;
+                }  
+            }
+        })
+    </script>
+</body>
+
+</html>

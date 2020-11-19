@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<div id="app">
+    <h2 :style="{'font-size':fontSize + 'px'}">{{message}}</h2>
+</div>
+
+<body>
+    <script src="../../assets/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '你好啊',
+                fontSize: 100
+            }
+        })
+    </script>
+</body>
+
+</html>
