@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<div id="app">
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+</div>
+
+<body>
+    <script src="../../assets/vue.js"></script>
+    <script>
+        // var没有块级作用域，代码块里和外一样
+        // 没有块级作用域引起的问题: for的块级
+        // const btns = document.getElementsByTagName('button');
+        // for (var i = 0; i < btns.length; i++) {
+        //     (function (num) {
+        //         btns[num].addEventListener('click', function () {
+        //             console.log('第' + num + '个按钮被点击');
+        //         })
+        //     })(i)
+        // }
+
+        // let含有块级作用域
+        const btns = document.getElementsByTagName('button');
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', function () {
+                console.log('第' + i + '个按钮被点击');
+            })
+        }
+    </script>
+</body>
+
+</html>
