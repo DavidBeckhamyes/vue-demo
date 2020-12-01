@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<div id="app">
+    {{message}}
+</div>
+
+<body>
+    <script src="../../assets/vue.js"></script>
+    <script>
+        // const obj = {
+        //     name: 'why',
+        //     age: 18,
+        //     run: function() {
+        //         console.log("在奔跑")
+        //     },
+        //     eat: function() {
+        //         console.log("在吃东西")
+        //     }
+        // }
+        // 1.属性的增强写法
+        const name = 'why';
+        const age = 18;
+        const height = 1.88;
+
+        //2.函数的增强写法
+        //ES5写法
+        // const obj = {
+        //     name: name,
+        //     age: age,
+        //     height: height
+        // }
+        const obj = {
+            name,
+            age,
+            height,
+            run() {
+
+            },
+            eat() {
+
+            }
+        }
+        console.log(obj)
+    </script>
+</body>
+
+</html>
