@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<div id="app">
+    <!-- 1.在遍历的过程中，没有使用索引值(下标值) -->
+    <ul>
+        <li v-for="item in names">{{item}}</li>
+    </ul>
+    <!-- 2.在遍历的过程中，使用索引值(下标值) -->
+    <ul>
+        <li v-for="(item, index) in names">{{index+1}}.{{item}}</li>
+    </ul>
+    <!-- 3.在遍历对象的过程中，如果只是获取一个值，那么获取到的是value -->
+    <ul>
+        <li v-for="item in info">{{item}}</li>
+    </ul>
+    <!-- 4.获取key和value -->
+    <ul>
+        <li v-for="(value, key) in info">{{value}}-{{key}}</li>
+    </ul>
+</div>
+
+<body>
+    <script src="../../assets/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                names: ['why', 'kobe', 'james', 'curry'],
+                info: {
+                    name: 'zlh',
+                    age: 28,
+                    height: 1.78
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
