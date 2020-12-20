@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<div id="app">
+    <my_cpn></my_cpn>
+</div>
+
+<div id="app2">
+    <my_cpn></my_cpn>
+</div>
+
+<body>
+    <script src="../../assets/vue.js"></script>
+    <script>
+        // 1.创建组件构造器
+        const cpc = Vue.extend({
+            template: `
+                <div>
+                    <h2>我是标题</h2>
+                    <p>我是内容，你哈哈哈</p>
+                </div>
+            `
+        })
+        // 2.注册组件(全局)
+        // Vue.component('my_cpn', cpc)
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '你好啊'
+            },
+            components: {
+                my_cpn: cpc
+            }
+        })
+        const app2 = new Vue({
+            el: '#app2'
+        })
+    </script>
+</body>
+
+</html>
