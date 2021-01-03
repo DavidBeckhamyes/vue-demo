@@ -63,8 +63,8 @@
                             this.$emit('num1change', newVal);
                         },
                         dnumber2(newVal) {
-                            // this.dnumber1 = this.dnumber2 * 100;
-                            // this.$emit('num2change', this.dnumber1);
+                            this.number1 = newVal / 100;
+                            this.$emit('num2change', newVal);
                         }
                     }
                 }
