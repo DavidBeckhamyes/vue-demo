@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<div id="app">
+    <h2>我是最外层父组件</h2>
+    <cpn></cpn>
+</div>
+
+<template id="cpn">
+    <ccpn></ccpn>
+</template>
+
+<template id="ccpn">
+    <div>
+        <h2>我是子组件</h2>
+        <button @click="btnClick">按钮</button>
+    </div>
+</template>
+
+<body>
+    <script src="../../assets/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '你好啊'
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+                            name: '我是cpn的name'
+                        }
+                    },
+                    components: {
+                        ccpn: {
+                            template: '#ccpn',
+                            methods: {
+                                btnClick() {
+                                    // 1.访问父组件$parent(耦合度高，不常用)
+                                    console.log(this.$parent)
+                                    console.log(this.$parent.name)
+
+                                    // 2.访问根组件$root
+                                    console.log(this.$root)
+                                }
+                            }
+                        }
+                    },
+                    methods: {
+
+                    }
+                }
+            },
+            methods: {
+            }
+        })
+    </script>
+</body>
+
+</html>
