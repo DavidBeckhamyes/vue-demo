@@ -7,18 +7,23 @@
 </template>
 
 <script>
-window.onload = function() {
-  document.getElementById("running").onclick = function() {
-      document.getElementById("slide").style.animationPlayState = "running";
-    // div.style.animationPlayState = "running";
-  };
-  document.getElementById("pause").onclick = function() {
-    // div.style.animationPlayState = "paused";
-    document.getElementById("slide").style.animationPlayState = "paused";
-  };
+export default {
+  mounted() {
+    this.operate();
+  },
+  methods: {
+    operate() {
+      document.getElementById("running").onclick = function () {
+        document.getElementById("slide").style.animationPlayState = "running";
+        // div.style.animationPlayState = "running";
+      };
+      document.getElementById("pause").onclick = function () {
+        // div.style.animationPlayState = "paused";
+        document.getElementById("slide").style.animationPlayState = "paused";
+      };
+    },
+  },
 };
-
-export default {};
 </script>
 
 <style lang="less" scoped>

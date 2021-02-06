@@ -6,9 +6,8 @@
 </template>
 
 <script>
-import eventBus from "../../eventBus";
-import componentA from "./components/componentA";
-import componentB from "./components/componentB";
+import componentA from "./componentA";
+import componentB from "./componentB";
 
 export default {
   components: {

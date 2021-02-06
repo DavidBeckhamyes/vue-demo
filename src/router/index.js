@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Style1 from "@/components/Style1";
 import Style2 from "@/components/Style2";
 import Style3 from "@/components/Style3";
 import Style4 from "@/components/Style4";
@@ -19,6 +18,7 @@ import Style15 from "@/components/Style15";
 import Style16 from "@/components/Style16";
 import Style17 from "@/components/Style17";
 import Style18 from "@/components/Style18";
+import eventBus from "@/components/eventBus"
 
 Vue.use(Router)
 
@@ -28,11 +28,6 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
-    },
-    {
-      path: '/Style1',
-      name: 'Style1',
-      component: Style1
     },
     {
       path: '/Style2',
@@ -104,6 +99,11 @@ export default new Router({
       path: '/Style18',
       name: 'Style18',
       component: Style18
+    },
+    {
+      path: '/eventBus',
+      name: 'eventBus',
+      component: eventBus
     }
   ]
 })
