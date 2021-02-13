@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+<body>
+    <script>
+        // 1.Promise的使用
+        // setTimeout(() => {
+        //     console.log("Hello World")
+        // }, 1000)  
+
+        // 参数 -> 函数
+        // resolve,reject本身它们又是函数
+        new Promise((resolve, reject) => {
+            // 第一次网络请求的代码
+            setTimeout(() => {
+                resolve()
+            }, 1000)
+        }).then(() => {
+            // 第一次拿到结果的处理代码
+            console.log("Hello World")
+            console.log("Hello World")
+            console.log("Hello World")
+            console.log("Hello World")
+            console.log("Hello World")
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve()
+                }, 1000)
+            })
+        }).then(() => {
+            console.log("Hello VueJS")
+            console.log("Hello VueJS")
+            console.log("Hello VueJS")
+            console.log("Hello VueJS")
+            console.log("Hello VueJS")
+        })
+
+        // 什么情况下会用到Promise? 一般情况下是有异步操作时,使用Promise对这个异步操作进行封装
+        // new -> 构造函数 -> (1.保存了一些状态信息 2.执行传入的函数)
+        // 在执行传入的回调函数时,会传入两个参数,resolve,reject.本身又是函数
+    </script>
+</body>
+
+</html>

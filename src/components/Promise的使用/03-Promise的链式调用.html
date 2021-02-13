@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve("Hello VueJs")
+                // reject("Error Message")
+            }, 1000)
+        }).then(res => {
+            console.log("第一次调用返回结果:",res)
+            // return Promise.resolve(res + '111')
+            throw "Error Message"
+        }).then(res => {
+            console.log("第一次处理返回的结果:",res)
+            return res + '222'
+        }).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    </script>
+</body>
+
+</html>
