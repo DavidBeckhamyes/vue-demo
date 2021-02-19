@@ -49,6 +49,10 @@
                     this.letters.reverse();
 
                     // 注意改索引值不是响应式的
+                    // this.letters[0] = 'bbbbbb'
+                    // this.letters.splice(0, 1, 'bbbbbb')
+                    // set(要修改的对象，索引值， 修改后的值)
+                    Vue.set(this.letters, 0, 'bbbbbb')
                 }
             }
         })
