@@ -6,6 +6,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+window.addEventListener('touchmove',  e => e.preventDefault())
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

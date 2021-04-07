@@ -18,7 +18,8 @@ import Style15 from "@/components/Style15";
 import Style16 from "@/components/Style16";
 import Style17 from "@/components/Style17";
 import Style18 from "@/components/Style18";
-import eventBus from "@/components/eventBus"
+import eventBus from "@/components/eventBus";
+import test from "@/views/test"
 
 Vue.use(Router)
 
@@ -104,6 +105,11 @@ export default new Router({
       path: '/eventBus',
       name: 'eventBus',
       component: eventBus
+    },
+    {
+      path: "/test",
+      name: 'test',
+      component: test
     }
   ]
 })
