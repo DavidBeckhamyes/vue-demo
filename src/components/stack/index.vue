@@ -16,7 +16,7 @@
       @webkit-transition-end="onTransitionEnd(index)"
       @transitionend="onTransitionEnd(index)"
     >
-      <img :src="item.src"/>
+      <img :src="item.src" />
     </li>
   </ul>
 </template>
@@ -347,6 +347,7 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  z-index: 1005;
   perspective: 1000px;
   perspective-origin: 50% 150%;
   -webkit-perspective: 1000px;

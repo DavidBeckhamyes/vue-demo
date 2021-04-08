@@ -6,6 +6,11 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+import Vconsole from 'vconsole'
+let vConsole = new Vconsole()
+
+Vue.use(vConsole)
+
 window.addEventListener('touchmove',  e => e.preventDefault())
 /* eslint-disable no-new */
 new Vue({
