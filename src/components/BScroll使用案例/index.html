@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BScroll</title>
+    <style>
+        .wrapper {
+            height: 200px;
+            background-color: red;
+
+            overflow: hidden;
+            /* overflow-y: scroll; */
+        }
+    </style>
+</head>
+
+<div>
+    <div class="wrapper">
+        <!-- BScroll里面只能包含一个元素 -->
+        <ul>
+            <button class="btn">按钮</button>
+            <li>使用实例1</li>
+            <li>使用实例2</li>
+            <li>使用实例3</li>
+            <li>使用实例4</li>
+            <li>使用实例5</li>
+            <li>使用实例6</li>
+            <li>使用实例7</li>
+            <li>使用实例8</li>
+            <li>使用实例9</li>
+            <li>使用实例10</li>
+            <li>使用实例11</li>
+            <li>使用实例12</li>
+            <li>使用实例13</li>
+            <li>使用实例14</li>
+            <li>使用实例15</li>
+            <li>使用实例16</li>
+            <li>使用实例17</li>
+            <li>使用实例18</li>
+            <li>使用实例19</li>
+            <li>使用实例20</li>
+            <li>使用实例21</li>
+            <li>使用实例22</li>
+            <li>使用实例23</li>
+            <li>使用实例24</li>
+            <li>使用实例25</li>
+            <li>使用实例26</li>
+            <li>使用实例27</li>
+            <li>使用实例28</li>
+            <li>使用实例29</li>
+            <li>使用实例30</li>
+            <li>使用实例31</li>
+            <li>使用实例32</li>
+            <li>使用实例33</li>
+            <li>使用实例34</li>
+            <li>使用实例35</li>
+            <li>使用实例36</li>
+            <li>使用实例37</li>
+            <li>使用实例38</li>
+            <li>使用实例39</li>
+            <li>使用实例40</li>
+            <li>使用实例41</li>
+            <li>使用实例42</li>
+            <li>使用实例43</li>
+            <li>使用实例44</li>
+            <li>使用实例45</li>
+            <li>使用实例46</li>
+            <li>使用实例47</li>
+            <li>使用实例48</li>
+            <li>使用实例49</li>
+            <li>使用实例50</li>
+            <li>使用实例51</li>
+            <li>使用实例52</li>
+            <li>使用实例53</li>
+            <li>使用实例54</li>
+            <li>使用实例55</li>
+            <li>使用实例56</li>
+            <li>使用实例57</li>
+            <li>使用实例58</li>
+            <li>使用实例59</li>
+            <li>使用实例60</li>
+            <li>使用实例61</li>
+            <li>使用实例62</li>
+            <li>使用实例63</li>
+            <li>使用实例64</li>
+            <li>使用实例65</li>
+            <li>使用实例66</li>
+            <li>使用实例67</li>
+            <li>使用实例68</li>
+            <li>使用实例69</li>
+            <li>使用实例70</li>
+            <li>使用实例71</li>
+            <li>使用实例72</li>
+            <li>使用实例73</li>
+            <li>使用实例74</li>
+            <li>使用实例75</li>
+            <li>使用实例76</li>
+            <li>使用实例77</li>
+            <li>使用实例78</li>
+            <li>使用实例79</li>
+            <li>使用实例80</li>
+            <li>使用实例81</li>
+            <li>使用实例82</li>
+            <li>使用实例83</li>
+            <li>使用实例84</li>
+            <li>使用实例85</li>
+            <li>使用实例86</li>
+            <li>使用实例87</li>
+            <li>使用实例88</li>
+            <li>使用实例89</li>
+            <li>使用实例90</li>
+            <li>使用实例91</li>
+            <li>使用实例92</li>
+            <li>使用实例93</li>
+            <li>使用实例94</li>
+            <li>使用实例95</li>
+            <li>使用实例96</li>
+            <li>使用实例97</li>
+            <li>使用实例98</li>
+            <li>使用实例99</li>
+            <li>使用实例100</li>
+        </ul>
+    </div>
+</div>
+
+<body>
+    <script src="https://unpkg.com/better-scroll@1.12.1/dist/bscroll.min.js"></script>
+    <script>
+        let wrapper = document.querySelector(".wrapper")
+        // probType 侦测
+        // 0和1都是不侦测实时的位置
+        // 2：在手指滚动的过程中侦测，手指离开后的惯性滚动过程中不侦测
+        // 3：只要是滚动，都侦测
+        let bs = new BScroll(wrapper, {
+            probeType: 3,
+            click: true,
+            pullUpLoad: true
+        })
+        // 默认情况下BScroll是不可以实时的监听滚动位置的
+        bs.on('scroll', (position) => {
+        })
+        bs.on('pullingUp', () => {
+            console.log('上拉加载更多')
+
+            // 发送网络请求，请求更多页的数据
+
+            // 等数据请求完成，并且将新的数据展示出来后
+            setTimeout(() => {
+                bs.finishPullUp();
+            }, 2000);
+        })
+        document.querySelector('.btn').addEventListener('click', function () {
+            console.log('----')
+        })
+    </script>
+</body>
+
+</html>
