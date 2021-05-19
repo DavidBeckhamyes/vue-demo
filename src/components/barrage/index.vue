@@ -10,11 +10,14 @@
           :name="'list' + (index % 3)"
           tag="div"
           :key="index"
-          @after-enter="afterEnter"
           @before-enter="beforeEnter"
-          @enter="enter"
         >
-          <div v-for="value in item" :key="value.id" class="transition-box">
+          <div
+            :id="'transition_' + index + '_' + ind"
+            v-for="(value, ind) in item"
+            :key="value.id"
+            class="transition-box"
+          >
             <slot :data="value"></slot>
           </div>
         </transition-group>
@@ -31,7 +34,9 @@ export default {
       dataList: [], // 有几个航道放几个数组
       initData: null, // 接收父组件传来的数组
       enterIndex: 0, // 进入哪个队列
-      leaveIndex: 0, // 删除索引
+      leaveIndex: 0, // 要销毁的队列序号
+      iteratorIndex: 0,
+      arrayIndex: 0,
     };
   },
   props: {
@@ -71,26 +76,31 @@ export default {
   methods: {
     move() {
       this.timer = setInterval(() => {
+        let firstBitIndex = this.enterIndex % this.liNum;
+        if (this.iteratorIndex > firstBitIndex) {
+          this.arrayIndex++;
+        } else {
+          this.iteratorIndex = firstBitIndex;
+        }
         if (this.enterIndex >= this.initData.length) {
           return;
         }
-        this.dataList[this.enterIndex % this.liNum].push(
-          this.initData[this.enterIndex]
-        );
+        this.dataList[firstBitIndex].push(this.initData[this.enterIndex]);
+        setTimeout(() => {
+          let itemDom = document.getElementById(
+            "transition_" + firstBitIndex + "_" + this.arrayIndex
+          );
+          console.log("3424234->", itemDom);
+        }, 100);
         this.enterIndex++;
       }, 1000);
     },
-    afterEnter() {
-      console.log("走完了");
-    },
+    
     beforeEnter() {
       setTimeout(() => {
         this.dataList[this.leaveIndex % this.liNum].shift();
         this.leaveIndex++;
       }, 15000);
-    },
-    enter: function (el) {
-      console.log("el==>", el.offsetWidth);
     },
   },
   destroyed() {
