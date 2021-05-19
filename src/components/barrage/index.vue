@@ -12,6 +12,7 @@
           :key="index"
           @after-enter="afterEnter"
           @before-enter="beforeEnter"
+          @enter="enter"
         >
           <div v-for="value in item" :key="value.id" class="transition-box">
             <slot :data="value"></slot>
@@ -36,7 +37,7 @@ export default {
   props: {
     liNum: {
       type: Number,
-      default: 5,
+      default: 2,
     },
     liHeight: {
       type: Number,
@@ -77,7 +78,7 @@ export default {
           this.initData[this.enterIndex]
         );
         this.enterIndex++;
-      }, 700);
+      }, 1000);
     },
     afterEnter() {
       console.log("走完了");
@@ -88,10 +89,13 @@ export default {
         this.leaveIndex++;
       }, 15000);
     },
+    enter: function (el) {
+      console.log("el==>", el.offsetWidth);
+    },
   },
   destroyed() {
-      clearInterval(this.timer);
-  }
+    clearInterval(this.timer);
+  },
 };
 </script>
 
@@ -116,7 +120,7 @@ export default {
         position: absolute;
         top: 0;
         height: 100%;
-        left: 110%;
+        left: 100%;
         overflow: hidden;
         white-space: nowrap;
       }

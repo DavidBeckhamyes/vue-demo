@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="box">
-      <barrage :liNum="5" :liHeight="55" :data="list" v-slot="{ data }">
+      <barrage :liNum="2" :liHeight="55" :data="list" v-slot="{ data }">
         <div>
           <h2>{{ data }}</h2>
         </div>
@@ -33,7 +33,7 @@ export default {
   methods: {
     fn() {
       this.list.push({
-        id: Math.random(10),
+        id: Math.random(10).toFixed(2),
         value: this.todo,
       });
       this.todo = "";
@@ -48,8 +48,7 @@ export default {
   height: 100vh;
 }
 .box {
-  margin: 0 auto;
-  width: 200px;
+  // width: 200px;
   overflow-x: hidden;
 }
 </style>
