@@ -1,46 +1,55 @@
 <template>
-  <div class="tan-box">
-    <ul>
-      <li></li>
-    </ul>
+  <div class="container">
+    <div class="box">
+      <barrage :liNum="5" :liHeight="55" :data="list" v-slot="{ data }">
+        <div>
+          <h2>{{ data }}</h2>
+        </div>
+      </barrage>
+    </div>
+    <input type="text" v-model="todo" @keydown.enter="fn" />
   </div>
 </template>
 
 <script>
+import Barrage from "../../components/barrage";
 export default {
   name: "VueTan",
-  data() {
-    return {};
+  components: {
+    Barrage,
   },
-  props: {
-    liNum: {
-      type: Number,
-      default: 5,
-    },
-    liHeight: {
-      type: Number,
-      default: 50,
+  data() {
+    return {
+      list: [
+        { id: 1, value: "1" },
+        { id: 2, value: "2" },
+        { id: 3, value: "3" },
+        { id: 4, value: "4" },
+        { id: 5, value: "5" },
+      ],
+      todo: "",
+    };
+  },
+  methods: {
+    fn() {
+      this.list.push({
+        id: Math.random(10),
+        value: this.todo,
+      });
+      this.todo = "";
     },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.tan-box {
-  width: 100%;
-  height: 100%;
-  position: relative;
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    vertical-align: middle;
-
-    li {
-      position: relative;
-      margin: 10px 0;
-    }
-  }
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+.box {
+  margin: 0 auto;
+  width: 200px;
+  overflow-x: hidden;
 }
 </style>

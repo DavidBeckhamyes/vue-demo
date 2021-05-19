@@ -19,7 +19,8 @@ import Style16 from "@/components/Style16";
 import Style17 from "@/components/Style17";
 import Style18 from "@/components/Style18";
 import eventBus from "@/components/eventBus";
-import test from "@/views/test"
+import test from "@/views/test";
+import VueTan from "@/views/vue-tan";
 
 Vue.use(Router)
 
@@ -110,6 +111,11 @@ export default new Router({
       path: "/test",
       name: 'test',
       component: test
+    },
+    {
+      path: "/VueTan",
+      name: "VueTan",
+      component: VueTan
     }
   ]
 })
