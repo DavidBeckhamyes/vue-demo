@@ -21,6 +21,7 @@ import Style18 from "@/components/Style18";
 import eventBus from "@/components/eventBus";
 import test from "@/views/test";
 import VueTan from "@/views/vue-tan";
+import Card from "@/views/card"
 
 Vue.use(Router)
 
@@ -116,6 +117,11 @@ export default new Router({
       path: "/VueTan",
       name: "VueTan",
       component: VueTan
+    },
+    {
+      path: "/Card",
+      name: "Card",
+      component: Card
     }
   ]
 })
