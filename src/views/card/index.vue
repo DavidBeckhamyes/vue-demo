@@ -3,9 +3,14 @@
     <button v-on:click="add">Add</button>
     <button v-on:click="remove">Remove</button>
     <transition-group name="list" tag="p">
-      <span v-for="item in items" v-bind:key="item" class="list-item">
+      <div
+        v-for="(item, index) in items"
+        v-bind:key="item"
+        class="list-item"
+        :class="{ 'list-item-scale': index % 2 == 0 }"
+      >
         {{ item }}
-      </span>
+      </div>
     </transition-group>
   </div>
 </template>
@@ -17,26 +22,39 @@ export default {
     return {
       items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       nextNum: 10,
+      transformItem: null,
     };
   },
   methods: {
-    randomIndex: function () {
-      return Math.floor(Math.random() * this.items.length);
-    },
     add: function () {
-      this.items.splice(this.randomIndex(), 0, this.nextNum++);
+      this.items.splice(0, 0, this.transformItem);
     },
     remove: function () {
-      this.items.splice(this.randomIndex(), 1);
+      const lastIndex = this.items.length - 1;
+      this.transformItem = this.items[lastIndex];
+      this.items.splice(lastIndex, 1);
     },
   },
 };
 </script>
 
 <style lang='less' scoped>
+#list-demo {
+  margin: 20px auto;
+}
 .list-item {
-  display: inline-block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background: red;
+  text-align: center;
+  line-height: 20px;
   margin-right: 10px;
+}
+.list-item-scale {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
 }
 .list-enter-active,
 .list-leave-active {
