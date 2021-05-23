@@ -1,8 +1,13 @@
 <template>
   <div id="list-demo">
-    <button v-on:click="add">Add</button>
+    <!-- <button v-on:click="add">Add</button> -->
     <button v-on:click="remove">Remove</button>
-    <transition-group name="list" tag="p">
+    <transition-group
+      appear
+      name="list"
+      tag="p"
+      style="height: 50px; width: 400px; background-color: blue"
+    >
       <div
         v-for="(item, index) in items"
         v-bind:key="item"
@@ -33,6 +38,9 @@ export default {
       const lastIndex = this.items.length - 1;
       this.transformItem = this.items[lastIndex];
       this.items.splice(lastIndex, 1);
+      setTimeout(() => {
+        this.add();
+      }, 1000);
     },
   },
 };
@@ -64,5 +72,9 @@ export default {
 .list-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+
+.list-move {
+  transition: all 1s ease;
 }
 </style>

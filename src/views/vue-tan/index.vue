@@ -26,18 +26,7 @@ export default {
   },
   data() {
     return {
-      list: [
-        { id: 1, value: "1" },
-        { id: 2, value: "2" },
-        { id: 3, value: "3" },
-        { id: 4, value: "4" },
-        { id: 5, value: "5" },
-        { id: 6, value: "6" },
-        { id: 7, value: "7" },
-        { id: 8, value: "8" },
-        { id: 9, value: "9" },
-        { id: 10, value: "10" },
-      ],
+      list: [],
       todo: "",
       enterIndex: 0, // 新进场序列
       oldIndex: 0, // 旧进场序列
@@ -62,6 +51,22 @@ export default {
       this.oldIndex = index;
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.list = [
+        { id: 1, value: "1" },
+        { id: 2, value: "2" },
+        { id: 3, value: "3" },
+        { id: 4, value: "4" },
+        { id: 5, value: "5" },
+        { id: 6, value: "6" },
+        { id: 7, value: "7" },
+        { id: 8, value: "8" },
+        { id: 9, value: "9" },
+        { id: 10, value: "10" },
+      ];
+    }, 1000);
+  },
 };
 </script>
 
@@ -71,6 +76,7 @@ export default {
   height: 100vh;
 }
 .box {
+  margin: 10px auto;
   width: 200px;
   overflow-x: hidden;
 }

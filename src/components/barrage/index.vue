@@ -83,6 +83,9 @@ export default {
   methods: {
     move() {
       this.timer = setInterval(() => {
+        if (this.initData.length == 0) {
+          return;
+        }
         if (this.enterIndex >= this.initData.length) {
           this.enterIndex = 0;
           this.leaveIndex = 0;
