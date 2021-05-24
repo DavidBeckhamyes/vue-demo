@@ -8,12 +8,7 @@
       tag="p"
       style="height: 50px; width: 400px; background-color: blue"
     >
-      <div
-        v-for="(item, index) in items"
-        v-bind:key="item"
-        class="list-item"
-        :class="{ 'list-item-scale': index % 2 == 0 }"
-      >
+      <div v-for="item in items" v-bind:key="item" class="list-item">
         {{ item }}
       </div>
     </transition-group>
@@ -51,7 +46,8 @@ export default {
   margin: 20px auto;
 }
 .list-item {
-  float: left;
+  transition: all 1s;
+  display: inline-block;
   width: 20px;
   height: 20px;
   background: red;
@@ -59,15 +55,12 @@ export default {
   line-height: 20px;
   margin-right: 10px;
 }
-.list-item-scale {
+.list-item:nth-child(odd) {
   width: 30px;
   height: 30px;
   line-height: 30px;
 }
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s;
-}
+
 .list-enter,
 .list-leave-to {
   opacity: 0;
@@ -76,5 +69,8 @@ export default {
 
 .list-move {
   transition: all 1s ease;
+}
+.list-leave-active {
+  // position: absolute;
 }
 </style>
