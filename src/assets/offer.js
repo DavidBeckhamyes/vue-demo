@@ -1,5 +1,6 @@
 window.onload = function () {
-    console.log(threeSum([3,0,-2,-1,1,2]))
+    lengthOfLongestSubstring("pwwkew");
+    // threeSum([3, 0, -2, -1, 1, 2])
     // reverse(-4530);
     // twoSum([0, 3, -3, 4, -1], -1)
     // findRepeatNumber([2, 3, 1, 0, 2, 5, 3]);
@@ -66,17 +67,19 @@ var threeSum = function (nums) {
     }
     var isZeroArray = !nums.some(item => item !== 0);
     if (isZeroArray) {
-        return [[0,0,0]]
+        return [[0, 0, 0]]
     }
     nums.sort((a, b) => a - b)
     var length = nums.length;
     const result = []
     for (var i = 0; i < length - 2; i++) {
-        console.log(444)
+        // 目标元素相同直接跳过
+        if (i > 0 && nums[i] == nums[i - 1]) {
+            continue
+        }
         var target = 0 - nums[i];
         var start = i + 1;
         var end = length - 1;
-
         while (start < end) {
             const res = [];
             if (target == nums[start] + nums[end]) {
@@ -84,19 +87,54 @@ var threeSum = function (nums) {
                 result.push(res)
                 start++;
                 end--;
-                if (start < end && nums[start] == nums[start - 1]) {
+                // 遍历到相同的元素直接跳过,while是因为可能存在多个连着的相同元素
+                while (nums[start] == nums[start - 1]) {
                     start++;
                 }
-                if (start < end && nums[end] == nums[end + 1]) {
+                while (nums[end] == nums[end + 1]) {
                     end--;
                 }
             } else if (target < nums[start] + nums[end]) {
-                start++;
-            } else {
                 end--;
+            } else {
+                start++;
             }
         }
     }
     return result
 };
 
+// 最长子串
+var lengthOfLongestSubstring = function (s) {
+    var length = 0;
+    const result = [];
+    var arr = s.split("");
+    if (arr.length == 0) {
+        return 0
+    }
+    var longestString = "";
+    for (var i = 0; i < arr.length; i++) {
+        if (!longestString) {
+            longestString += arr[i];
+        } else {
+            var position = longestString.indexOf(arr[i]);
+            if (position != -1) {
+                result.push(longestString);
+                longestString = longestString.slice(position + 1, longestString.length);
+            }
+            longestString += arr[i];
+        }
+        if (i == arr.length - 1) {
+            result.push(longestString);
+        }
+    }
+    console.log(result)
+    result.forEach(str => {
+        if (str.length > length) {
+            length = str.length
+        }
+    })
+
+    return length
+
+}
