@@ -1,5 +1,6 @@
 window.onload = function () {
-    lengthOfLongestSubstring("pwwkew");
+    longestPalindrome("babad");
+    // lengthOfLongestSubstring("pwwkew");
     // threeSum([3, 0, -2, -1, 1, 2])
     // reverse(-4530);
     // twoSum([0, 3, -3, 4, -1], -1)
@@ -138,3 +139,15 @@ var lengthOfLongestSubstring = function (s) {
     return length
 
 }
+
+var longestPalindrome = function(s) {
+    const arr = s.split("");
+    var result = arr[0];
+    for(var i = 0;i<arr.length;i++){
+        if (i < 1 && i > arr.length-1){
+
+        } else {
+            
+        }
+    }
+};
