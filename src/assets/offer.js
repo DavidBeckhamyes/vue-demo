@@ -1,5 +1,5 @@
 window.onload = function () {
-    longestPalindrome("ccd");
+    longestPalindrome("ccc");
     // lengthOfLongestSubstring("pwwkew");
     // threeSum([3, 0, -2, -1, 1, 2])
     // reverse(-4530);
@@ -146,39 +146,27 @@ var longestPalindrome = function (s) {
         return s;
     }
     const arr = s.split("");
-    if (s.length == 2 && arr[0] == arr[1]) {
-        return s
-    }
 
     var length = 0;
-    var res = arr[0];
+    var res = "";
     for (var i = 0; i < arr.length; i++) {
         var result = arr[i];
-        if (i < 1 || i > arr.length - 2) {
-            
-        } else {
-            var start = i - 1;
-            var end = i + 1;
-            while (start >= 0 && end < arr.length && arr[i] == arr[end]) {
-                result = result + arr[end];
-                if (arr[0] == arr[i]) {
-                    result = result + arr[0]
-                }
-                end++;
-                res = result;
-            }
-
-            while (arr[start] == arr[end] && start >= 0 && end < arr.length) {
-                result = arr[start] + result + arr[end];
-                start--;
-                end++;
-                if (result.length > length) {
-                    length = result.length;
-                    res = result
-                }
-            }
-            result = "";
+        var start = i - 1;
+        var end = i + 1;
+        while (start >= -1 && end < arr.length && arr[i] == arr[end]) {
+            result = result + arr[end];
+            end++;
         }
+        while (start >= 0 && end < arr.length && arr[start] == arr[end]) {
+            result = arr[start] + result + arr[end];
+            start--;
+            end++;
+        }
+        if (result.length > length) {
+            length = result.length;
+            res = result
+        }
+        result = "";
     }
     return res
 };
