@@ -1,5 +1,7 @@
 window.onload = function () {
-    longestPalindrome("ccc");
+    console.log(combination([3,6,12,7,98,9],2))
+    // console.log(searchInsert([1,3,5,6], 0));
+    // longestPalindrome("ccc");
     // lengthOfLongestSubstring("pwwkew");
     // threeSum([3, 0, -2, -1, 1, 2])
     // reverse(-4530);
@@ -170,3 +172,45 @@ var longestPalindrome = function (s) {
     }
     return res
 };
+
+// 搜索插入位置
+var searchInsert = function (nums, target) {
+    if (nums.indexOf(target) != -1) {
+        return nums.indexOf(target);
+    } else {
+        // 处理边界情况
+        if (target < nums[0]) {
+            return 0
+        }
+        if (target > nums[nums.length - 1]) {
+            return nums.length
+        }
+        for (var i = 0; i < nums.length - 1; i++) {
+            if (target > nums[i] && target < nums[i + 1]) {
+                return i + 1;
+            }
+        }
+    }
+};
+
+
+function combination(arr, m) {
+    let r = [];
+    _([], arr, m);
+    return r;
+    function _(t, a, m) {
+      //t:临时数组 a:目标数组 m：多少个数进行组合
+      if (m === 0) {
+        r[r.length] = t;//相当于push
+        return;
+      }
+      for (let i = 0; i <= a.length - m; i++) {
+        //从0开始 到n-m
+   
+        let b = t.slice();//将t赋值给b 不能用=赋值，使用slice会形成新的数组赋值
+        b.push(a[i])
+        _(b, a.slice(i + 1), m - 1); 
+      }
+    }
+  }
+  
