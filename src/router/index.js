@@ -21,7 +21,8 @@ import Style18 from "@/components/Style18";
 import eventBus from "@/components/eventBus";
 import test from "@/views/test";
 import VueTan from "@/views/vue-tan";
-import Card from "@/views/card"
+import Card from "@/views/card";
+const bandit = () => import('@/views/bandit');
 
 Vue.use(Router)
 
@@ -122,6 +123,11 @@ export default new Router({
       path: "/Card",
       name: "Card",
       component: Card
+    },
+    {
+      path: "/bandit",
+      name: "bandit",
+      component: bandit
     }
   ]
 })
