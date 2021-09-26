@@ -1,5 +1,7 @@
 window.onload = function () {
-    console.log(combination([3,6,12,7,98,9],2))
+    QuickSort([1,5,7,3,4,9,11,0,2], 0, 8)
+    // InsertionSort([1,5,7,3,4,9,11,0,2])
+    // console.log(combination([3,6,12,7,98,9],2))
     // console.log(searchInsert([1,3,5,6], 0));
     // longestPalindrome("ccc");
     // lengthOfLongestSubstring("pwwkew");
@@ -212,5 +214,62 @@ function combination(arr, m) {
         _(b, a.slice(i + 1), m - 1); 
       }
     }
+  }
+
+  // 插入排序
+  function InsertionSort(array) {
+    let start = 0;  // 起始位置
+    for (let i = start + 1; i < array.length; i++) {
+        let cursor = i;
+        while(cursor - 1 >= 0 && array[cursor - 1] >= array[cursor]) {
+            // 向左遍历 一直找到遍历元素小于 游标指向元素为止
+            let tmpVar = array[cursor];
+            array[cursor] = array[cursor - 1];
+            array[cursor - 1] = tmpVar;
+            cursor--;
+        }
+    }
+    console.log("按照插入排序正序排序后的数组为->",array);
+  }
+
+  function partition(array, left, right) {
+    if (array.length == 0) {
+        return;
+    }
+    if (left > right) {
+        return;
+    }
+    
+    let key = array[left];  // 基准数
+    let leftIndex = left;  // 左侧指针位置
+    let rightIndex = right;  // 右侧指针位置
+    
+    while (leftIndex != rightIndex) {
+        while (leftIndex < rightIndex && array[leftIndex] <= key) {
+            leftIndex++;
+        }
+        while (leftIndex < rightIndex && array[rightIndex] >= key) {
+            rightIndex--;
+        }
+        if (leftIndex < rightIndex) {
+            let tmpValue1 = array[leftIndex];
+            array[leftIndex] = array[rightIndex];
+            array[rightIndex] = tmpValue1;
+        }
+    }
+    array[left] = array[leftIndex];
+    array[leftIndex] = key;
+    return leftIndex;
+  }
+
+
+  // 快速排序
+  function QuickSort(array, left, right) {
+    // 标记出基准数的位置
+    let partitionIndex = partition(array, left, right);
+    // 基准数左侧快排
+    QuickSort(array, left, partitionIndex - 1);
+    // 基准数右侧快排
+    QuickSort(array, partitionIndex + 1, right); 
   }
   
