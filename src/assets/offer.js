@@ -1,7 +1,10 @@
 window.onload = function () {
-    QuickSort([1,5,7,3,4,9,11,0,2], 0, 8)
+    // 快速排序测试用例
+    // const arr = [1, 5, 7, 3, 4, 9, 11, 0, 2];
+    // QuickSort(arr, 0, arr.length - 1);
+    // 插入排序测试用例
     // InsertionSort([1,5,7,3,4,9,11,0,2])
-    // console.log(combination([3,6,12,7,98,9],2))
+    // 搜索插入位置测试用例
     // console.log(searchInsert([1,3,5,6], 0));
     // longestPalindrome("ccc");
     // lengthOfLongestSubstring("pwwkew");
@@ -195,33 +198,12 @@ var searchInsert = function (nums, target) {
     }
 };
 
-
-function combination(arr, m) {
-    let r = [];
-    _([], arr, m);
-    return r;
-    function _(t, a, m) {
-      //t:临时数组 a:目标数组 m：多少个数进行组合
-      if (m === 0) {
-        r[r.length] = t;//相当于push
-        return;
-      }
-      for (let i = 0; i <= a.length - m; i++) {
-        //从0开始 到n-m
-   
-        let b = t.slice();//将t赋值给b 不能用=赋值，使用slice会形成新的数组赋值
-        b.push(a[i])
-        _(b, a.slice(i + 1), m - 1); 
-      }
-    }
-  }
-
-  // 插入排序
-  function InsertionSort(array) {
+// 插入排序
+function InsertionSort(array) {
     let start = 0;  // 起始位置
     for (let i = start + 1; i < array.length; i++) {
         let cursor = i;
-        while(cursor - 1 >= 0 && array[cursor - 1] >= array[cursor]) {
+        while (cursor - 1 >= 0 && array[cursor - 1] >= array[cursor]) {
             // 向左遍历 一直找到遍历元素小于 游标指向元素为止
             let tmpVar = array[cursor];
             array[cursor] = array[cursor - 1];
@@ -229,27 +211,28 @@ function combination(arr, m) {
             cursor--;
         }
     }
-    console.log("按照插入排序正序排序后的数组为->",array);
-  }
+    console.log("按照插入排序正序排序后的数组为->", array);
+}
 
-  function partition(array, left, right) {
+// 快速排序
+function QuickSort(array, left, right) {
     if (array.length == 0) {
         return;
     }
     if (left > right) {
         return;
     }
-    
+
     let key = array[left];  // 基准数
     let leftIndex = left;  // 左侧指针位置
     let rightIndex = right;  // 右侧指针位置
-    
+
     while (leftIndex != rightIndex) {
-        while (leftIndex < rightIndex && array[leftIndex] <= key) {
-            leftIndex++;
-        }
         while (leftIndex < rightIndex && array[rightIndex] >= key) {
             rightIndex--;
+        }
+        while (leftIndex < rightIndex && array[leftIndex] <= key) {
+            leftIndex++;
         }
         if (leftIndex < rightIndex) {
             let tmpValue1 = array[leftIndex];
@@ -259,17 +242,8 @@ function combination(arr, m) {
     }
     array[left] = array[leftIndex];
     array[leftIndex] = key;
-    return leftIndex;
-  }
-
-
-  // 快速排序
-  function QuickSort(array, left, right) {
-    // 标记出基准数的位置
-    let partitionIndex = partition(array, left, right);
     // 基准数左侧快排
-    QuickSort(array, left, partitionIndex - 1);
+    QuickSort(array, left, leftIndex - 1);
     // 基准数右侧快排
-    QuickSort(array, partitionIndex + 1, right); 
-  }
-  
+    QuickSort(array, leftIndex + 1, right);
+}
