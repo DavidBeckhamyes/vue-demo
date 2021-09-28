@@ -1,4 +1,16 @@
+window.onload = function() {
+    let stackList = new stack();
+    stackList.push("a");
+    stackList.push("b");
+    stackList.push("c");
+    // 测试压栈
+    console.log("stackList->",stackList)
+    // 测试弹出
+    console.log(stackList.pop());
+}
+
 class stack {
+    // 数组实现堆栈
     constructor () {
         this.CAPACITY = 1000;
         this.top = -1;
@@ -20,7 +32,7 @@ class stack {
             console.log("Stack Underflow!");
             return 0
         }
-        let element = this.stack[--this.top];
+        let element = this.stack[this.top--];
         return element
     }
 

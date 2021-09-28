@@ -1,19 +1,4 @@
-window.onload = function () {
-    let ll = new LinkedList();
-    ll.append('1');
-    ll.append('2');
-    ll.append('3');
-    ll.append('4');
-
-    ll.appendAt(4, '5');
-
-    console.log('index->',ll.indexOf('3'))
-    console.dir(ll, {
-        depth: 100
-    })
-};
-
-class Node {
+export class Node {
     // 节点类
     constructor(element) {
         this.element = element;
@@ -21,7 +6,7 @@ class Node {
     }
 }
 
-class LinkedList {
+export class LinkedList {
     // 链表类
     constructor() {
         // 构造函数 初始化链表的头和大小
@@ -39,7 +24,7 @@ class LinkedList {
             // 链表不为空 从尾部追加
             let tailNode = this.getNode(this.size - 1);
             tailNode.next = node;
-        }   
+        }
         this.size++;
     }
 
@@ -67,7 +52,7 @@ class LinkedList {
     appendAt(position, element) {
         // 在某个位置插入节点
         if (position < 0 || position > this.size) {
-            throw new Error("opt:appendAt, err:out range of list!"); 
+            throw new Error("opt:appendAt, err:out range of list!");
         }
         let node = new Node(element);
         if (position == 0) {
