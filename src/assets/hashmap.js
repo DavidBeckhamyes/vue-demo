@@ -60,6 +60,7 @@ class HashMap {
             head = head.next;
         }
         let newNode = new HashNode(key, value);
+        newNode.next = this.bucketArray[index];
         this.bucketArray[index] = newNode;
         this.size++;
 
