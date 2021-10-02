@@ -4,6 +4,9 @@ window.onload = function () {
     // QuickSort(arr, 0, arr.length - 1);
     // 插入排序测试用例
     // InsertionSort([1,5,7,3,4,9,11,0,2])
+    // 归并排序测试用例
+    // let array = [1, 5, 7, 3, 4, 9, 11, 8, 2, 10, 0];
+    // mergeSort(array, 0, 10);
     // 搜索插入位置测试用例
     // console.log(searchInsert([1,3,5,6], 0));
     // longestPalindrome("ccc");
@@ -246,4 +249,44 @@ function QuickSort(array, left, right) {
     QuickSort(array, left, leftIndex - 1);
     // 基准数右侧快排
     QuickSort(array, leftIndex + 1, right);
+}
+
+// 归并排序
+function mergeSort(array, left, right) {
+    if (right - left < 1) {
+        // 子数组只有一个元素 结束递归
+        return;
+    }
+    let mid = Math.floor(left + (right - left) / 2);
+    mergeSort(array, left, mid);
+    mergeSort(array, mid + 1, right);
+    merge(array, left, right, mid + 1);
+}
+
+function merge(array, left, right, mid) {
+    let i = left;
+    let j = mid;
+    let p = left;
+    let temp = [];
+
+    while (i < mid && j <= right) {
+        if (array[i] < array[j]) {
+            temp[p++] = array[i++];
+        } else {
+            temp[p++] = array[j++];
+        }
+    }
+    while (i < mid) {
+        // 右边的数组已经遍历完
+        temp[p++] = array[i++];
+    }
+    while (j <= right) {
+        // 左边的数组已经遍历完
+        temp[p++] = array[j++];
+    }
+    p = left;
+    i = left;
+    while (i <= right) {
+        array[i++] = temp[p++];
+    }
 }
