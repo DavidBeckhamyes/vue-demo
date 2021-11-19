@@ -11,7 +11,7 @@ class ArrayQueue {
     enqueue(item) {
         if (this.isFull()) return;
         this.array[this.rear] = item;
-        thia.rear = (this.rear++) % this.capacity;
+        this.rear = (this.rear++) % this.capacity;
         this.size++;
         console.log(item + "is enqueued!");
     }
