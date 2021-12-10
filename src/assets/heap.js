@@ -23,7 +23,7 @@ class MaxHeap {
 
     getRightChildIndex(parentIndex) {
         // 根据父节点的index 获取它的右孩子在数组中的index
-        return 2 * parentIndex + 1;
+        return 2 * parentIndex + 2;
     }
 
     getParentIndex(childIndex) {
