@@ -23,6 +23,7 @@ import test from "@/views/test";
 import VueTan from "@/views/vue-tan";
 import Card from "@/views/card";
 const bandit = () => import('@/views/bandit');
+const overturnCard = () => import('@/views/overturn-card');
 
 Vue.use(Router)
 
@@ -128,6 +129,11 @@ export default new Router({
       path: "/bandit",
       name: "bandit",
       component: bandit
+    },
+    {
+      path: "/overturnCard",
+      name: "overturnCard",
+      component: overturnCard
     }
   ]
 })
