@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继承(类)</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            say() {
+                console.log(`我叫${this.name},向你说你好`)
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, age) {
+                super(name, age)
+            }
+            sayGoodBye() {
+                console.log("哈哈哈")
+            }
+        }
+
+        let stu = new Student("詹凌瀚", 27);
+        stu.say();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom元素的各个变量</title>
+</head>
+
+<body>
+    <div id="divParent" style="padding: 8px; background-color:#CCC; position: relative;">
+        <div id="divChild" style="background-color:#C00; margin: 30px; padding: 10px;
+            height: 200px; width: 200px; border: solid 10px  #0000CC;">
+        </div>
+    </div>
+
+    <div id="divParent2" style="padding: 8px; background-color: #aaa; height:200px; width:300px; overflow:auto">
+        <div id="divChild2" style="background-color: #0f0;height: 400px; width: 500px; border: solid 10px #f00;">
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    // offsetHeight offsetWidth offsetLeft offsetTop
+
+    // var div = document.getElementById('divChild');
+
+    // var offsetHeight = div.offsetHeight;
+    // var offsetWidth = div.offsetWidth;
+    // div.innerHTML += 'offsetHeight: ' + offsetHeight + '<br />';
+    // div.innerHTML += 'offsetWidth: ' + offsetWidth + '<br />';
+
+    // var offsetLeft = div.offsetLeft;
+    // var offsetTop = div.offsetTop;
+    // div.innerHTML += 'offsetLeft: ' + offsetLeft + '<br />';
+    // div.innerHTML += 'offsetTop: ' + offsetTop + '<br />';
+
+    // var offsetParent = div.offsetParent;
+    // div.innerHTML += 'offsetParent: ' + offsetParent.id + '<br />';
+
+
+    var div = document.getElementById('divChild');
+
+    var clientHeight = div.clientHeight;
+    var clientWidth = div.clientWidth;
+    div.innerHTML += 'clientHeight: ' + clientHeight + '<br />';
+    div.innerHTML += 'clientWidth: ' + clientWidth + '<br />';
+
+    var offsetLeft = div.offsetLeft;
+    var offsetTop = div.offsetTop;
+    div.innerHTML += 'offsetLeft: ' + offsetLeft + '<br />';
+    div.innerHTML += 'offsetTop: ' + offsetTop + '<br />';
+
+    var divParent = document.getElementById("divParent2");
+    var divChild = document.getElementById("divChild2");
+    divParent.onscroll = function () {
+        var scrollwidth = divParent.scrollWidth;
+        var scrollheight = divParent.scrollHeight;
+        var scrolltop = divParent.scrollTop;
+        var scrollleft = divParent.scrollLeft;
+        divChild.innerHTML += 'scrollwidth: ' + scrollwidth + '<br />';
+        divChild.innerHTML += 'scrollheight: ' + scrollheight + '<br />';
+        divChild.innerHTML += 'scrolltop: ' + scrolltop + '<br />';
+        divChild.innerHTML += 'scrollleft: ' + scrollleft + '<br />';
+    }
+</script>
+
+</html>
