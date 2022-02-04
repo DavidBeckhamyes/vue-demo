@@ -11,6 +11,9 @@ let vConsole = new Vconsole()
 
 Vue.use(vConsole)
 
+import toast from "@/views/toast-test/component";
+Vue.use(toast);
+
 window.addEventListener('touchmove',  e => e.preventDefault())
 /* eslint-disable no-new */
 new Vue({
