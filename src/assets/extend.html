@@ -30,6 +30,15 @@
         }
 
         let stu = new Student("詹凌瀚", 27);
+        console.log(stu.__proto__ === Student.prototype)
+        console.log(Student.prototype)
+        console.log(Student.__proto__ === Person)
+        console.log(Person.prototype)
+        console.log(typeof Person)
+        console.log(Person.__proto__ === Function.prototype);
+        console.log(Student.prototype.__proto__ === Person.prototype)
+        console.log(Person.prototype.__proto__ === Object.prototype)
+        console.log(Person.prototype.__proto__)
         stu.say();
 
     </script>
