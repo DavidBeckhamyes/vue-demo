@@ -131,12 +131,13 @@
             }
 
             _createFragment() {
+                // 创建文档片段documentFragment，可以看作节点容器，它可以包含多个子节点。使用DocumentFragment处理节点，速度和性能远远优于直接操作DOM
                 const frag = document.createDocumentFragment();
 
                 let child;
                 while (child = this.el.firstChild) {
                     this._compile(child)  // <h2> {{message}} </h2>
-
+                    // 将子节点劫持到文档片段中
                     frag.appendChild(child)
                 }
                 return frag
@@ -146,6 +147,7 @@
                 if (node.nodeType === 1) {  // 标签节点 
                     const attrs = node.attributes;
                     if (attrs.hasOwnProperty('v-model')) {
+                        // 获取v-model绑定的属性名
                         const name = attrs['v-model'].nodeValue;
                         node.addEventListener('input', e => {
                             this.vm[name] = e.target.value;
