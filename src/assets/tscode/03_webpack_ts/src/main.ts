@@ -3,6 +3,6 @@
 // import "../05_泛型/03_泛型接口";
 
 // import "./design_pattern_FactoryMethod";
-import "./design_pattern_Interpreter"
+import "./design_pattern_Visitor"
 
 document.write("哈哈哈，我又变帅了")

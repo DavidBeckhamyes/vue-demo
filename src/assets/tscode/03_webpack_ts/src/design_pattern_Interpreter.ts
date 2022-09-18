@@ -42,7 +42,7 @@
     class TerminalExpression implements Expression {
         private set: string[] = [];
         constructor(data: string[]) {
-            for (const str in data) {
+            for (const str of data) {
                 this.set.push(str)
             }
         }
