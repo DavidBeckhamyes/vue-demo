@@ -56,15 +56,17 @@ class HashMap {
                 head.value = value;
                 return;
             }
-            // 没有相同的key 接着追加节点
+            // 没有相同的key 指向下一个节点继续查找
             head = head.next;
         }
+        // 遍历完没有相同的key 需要在head节点处追加一个新的节点
         let newNode = new HashNode(key, value);
         newNode.next = this.bucketArray[index];
         this.bucketArray[index] = newNode;
         this.size++;
 
         if (this.size / this.numBuckets > 0.7) {
+            // 扩容
             this.generateBiggerArray();
         }
     }
@@ -94,8 +96,10 @@ class HashMap {
 
         while(head != null) {
             if (head.key == key) {
+                // 找到了key 返回对应的value
                 return head.value;
             }
+            // 没找到继续遍历
             head = head.next;
         }
         return null;
