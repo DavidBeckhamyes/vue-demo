@@ -230,20 +230,20 @@ function QuickSort(array, left, right) {
     let leftIndex = left;  // 左侧指针位置
     let rightIndex = right;  // 右侧指针位置
 
-    while (leftIndex != rightIndex) {
+    while (leftIndex < rightIndex) {
         while (leftIndex < rightIndex && array[rightIndex] >= key) {
             rightIndex--;
+        }
+        if (array[rightIndex] < key) {
+            array[leftIndex] = array[rightIndex];
         }
         while (leftIndex < rightIndex && array[leftIndex] <= key) {
             leftIndex++;
         }
-        if (leftIndex < rightIndex) {
-            let tmpValue1 = array[leftIndex];
-            array[leftIndex] = array[rightIndex];
-            array[rightIndex] = tmpValue1;
+        if (array[leftIndex] > key) {
+            array[rightIndex] = array[leftIndex];
         }
     }
-    array[left] = array[leftIndex];
     array[leftIndex] = key;
     // 基准数左侧快排
     QuickSort(array, left, leftIndex - 1);
