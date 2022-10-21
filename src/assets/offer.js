@@ -15,6 +15,8 @@ window.onload = function () {
     // reverse(-4530);
     // twoSum([0, 3, -3, 4, -1], -1)
     // findRepeatNumber([2, 3, 1, 0, 2, 5, 3]);
+    // 最大子段和
+    // console.log(maxSubSum([4, -3, -6, 1, 13, -15, 9, 4, 2], 0, 8));
 }
 
 // 找到数组中的重复元素
@@ -289,4 +291,47 @@ function merge(array, left, right, mid) {
     while (i <= right) {
         array[i++] = temp[p++];
     }
+}
+
+var maxSubSum = function (array, left, right) {
+    let sum = 0;  // 初始化最大子段和为0
+    if (left == right) {
+        // 切分到只有一个数
+        if (array[left] < 0) {
+            sum = 0;
+        } else {
+            sum = array[left];
+        }
+    } else {
+        let center = Math.floor(left + (right - left) / 2);
+        let leftMaxSubSum = maxSubSum(array, left, center);  // 获取当前左子段的最大子段和
+        let rightMaxSubSum = maxSubSum(array, center + 1, right);  // 获取当前右子段的最大子段和
+
+        let leftSum = 0;  // 当前左侧子段求和
+        let s1 = 0;  // 左侧子段的最大和
+        for (let i = center; i >= 0; i--) {
+            leftSum += array[i];
+            if (s1 <= leftSum) {
+                s1 = leftSum
+            }
+        }
+
+        let rightSum = 0;  // 当前右侧子段求和
+        let s2 = 0;  // 右侧子段的最大和
+        for (let i = center + 1; i <= right; i++) {
+            rightSum += array[i];
+            if (s2 <= rightSum) {
+                s2 = rightSum
+            }
+        }
+
+        sum = s1 + s2;
+        if (sum <= leftMaxSubSum) {
+            sum = leftMaxSubSum
+        }
+        if (sum <= rightMaxSubSum) {
+            sum = rightMaxSubSum
+        }
+    }
+    return sum;
 }
