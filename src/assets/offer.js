@@ -15,6 +15,12 @@ window.onload = function () {
     // reverse(-4530);
     // twoSum([0, 3, -3, 4, -1], -1)
     // findRepeatNumber([2, 3, 1, 0, 2, 5, 3]);
+    // 最大子段和
+    // console.log(maxSubSum([4, -3, -6, 1, 13, -15, 9, 4, 2], 0, 8));
+    // 0-1背包问题(物品数量:4,背包容量-可装物品的最大重量:5)
+    zeroOnePackage(4, 5);
+    // 最长公共子序列动态规划
+    LCS(['A','C','D','F','G','E'],['A','M','D','H','E','F','G']);
 }
 
 // 找到数组中的重复元素
@@ -289,4 +295,78 @@ function merge(array, left, right, mid) {
     while (i <= right) {
         array[i++] = temp[p++];
     }
+}
+
+var maxSubSum = function (array, left, right) {
+    let sum = 0;  // 初始化最大子段和为0
+    if (left == right) {
+        // 切分到只有一个数
+        if (array[left] < 0) {
+            sum = 0;
+        } else {
+            sum = array[left];
+        }
+    } else {
+        let center = Math.floor(left + (right - left) / 2);
+        let leftMaxSubSum = maxSubSum(array, left, center);  // 获取当前左子段的最大子段和
+        let rightMaxSubSum = maxSubSum(array, center + 1, right);  // 获取当前右子段的最大子段和
+
+        let leftSum = 0;  // 当前左侧子段求和
+        let s1 = 0;  // 左侧子段的最大和
+        for (let i = center; i >= 0; i--) {
+            leftSum += array[i];
+            if (s1 <= leftSum) {
+                s1 = leftSum
+            }
+        }
+
+        let rightSum = 0;  // 当前右侧子段求和
+        let s2 = 0;  // 右侧子段的最大和
+        for (let i = center + 1; i <= right; i++) {
+            rightSum += array[i];
+            if (s2 <= rightSum) {
+                s2 = rightSum
+            }
+        }
+
+        sum = s1 + s2;
+        if (sum <= leftMaxSubSum) {
+            sum = leftMaxSubSum
+        }
+        if (sum <= rightMaxSubSum) {
+            sum = rightMaxSubSum
+        }
+    }
+    return sum;
+}
+
+var zeroOnePackage = function (number, weight) {
+    const w = [0, 1, 2, 3, 4];  // 物品重量数组
+    const v = [0, 2, 4, 5, 6];  // 背包价值数组
+
+    const max = function (a, b) {
+        if (a > b) {
+            return a
+        } else {
+            return b
+        }
+    }
+
+    const maxValues = new Array(number + 1).fill(0).map((x) => new Array(weight + 1).fill(0));
+    for (i = 1; i <= number; i++) {  // 遍历物品
+        for (j = 1; j <= weight; j++) {  // 遍历背包重量
+            if (j < w[i]) {
+                // 当前物品在现有背包体量下装不下
+                maxValues[i][j] = maxValues[i - 1][j];  // 从前i-1个物品中找到能装进当前背包的物品
+            } else {
+                // 当前物品在现有背包体量下能装下
+                maxValues[i][j] = max(maxValues[i - 1][j], v[i] + maxValues[i - 1][j - w[i]])  // 不装当前物品,从前i-1个物品中找到能装进当前背包的物品;装下当前物品,再从前i-1个物品中找到能装进当前背包的物品，两个取最大值
+            }
+        }
+    }
+    console.log(maxValues[number][weight])
+}
+
+var LCS = function() {
+
 }
