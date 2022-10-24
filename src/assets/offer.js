@@ -20,7 +20,8 @@ window.onload = function () {
     // 0-1背包问题(物品数量:4,背包容量-可装物品的最大重量:5)
     zeroOnePackage(4, 5);
     // 最长公共子序列动态规划
-    LCS(['A','C','D','F','G','E'],['A','M','D','H','E','F','G']);
+    LCS('ACDFGE', 'AMDHEFG');
+    matrixChain();
 }
 
 // 找到数组中的重复元素
@@ -367,6 +368,63 @@ var zeroOnePackage = function (number, weight) {
     console.log(maxValues[number][weight])
 }
 
-var LCS = function() {
+var LCS = function (s1, s2) {
+    const charArray1 = s1.split('');
+    const charArray2 = s2.split('');
 
+    const array = new Array(charArray1.length + 1).fill(0).map((x) => new Array(charArray2.length + 1).fill(0));
+
+    for (let i = 1; i <= charArray1.length; i++) {
+        for (let j = 1; j <= charArray2.length; j++) {
+            if (charArray1[i - 1] == charArray2[j - 1]) {
+                array[i][j] = 1 + Math.max(array[i - 1][j], array[i][j - 1]);
+            } else {
+                array[i][j] = Math.max(array[i - 1][j], array[i][j - 1]);
+            }
+        }
+    }
+    let i = charArray1.length, j = charArray2.length;
+    let stash = [];
+    while (i - 1 >= 0 && j - 1 >= 0) {
+        if (charArray1[i - 1] == charArray2[j - 1]) {
+            stash.push(charArray1[i - 1]);
+            i--;
+            j--;
+        } else {
+            if (array[i - 1][j] > array[i][j - 1]) {
+                i--;
+            } else {
+                j--;
+            }
+        }
+    }
+    let n = 1;
+    while (stash.length) {
+        console.log("第" + n + "次出栈的子序列中的字符为:" + stash.pop() + '');
+        n++;
+    }
+}
+
+var matrixChain = function () {
+    const matrixArray = [30, 35, 15, 5, 10, 20, 25];
+    const dp = new Array(matrixArray.length).fill(999999).map((x) => new Array(matrixArray.length).fill(999999));
+
+    for (let i = 1; i <= matrixArray.length - 1; i++) {
+        for (let j = 1; j <= i; j++) {
+            dp[i][j] = 0;
+        }
+    }
+    for (let i = 1; i <= matrixArray.length - 1; i++) {
+        for (let j = i + 1; j <= matrixArray.length - 1; j++) {
+            let temp = dp[i][j];
+            for (let k = i; k < j; k++) {
+                let value = dp[i][k] + dp[k + 1][j] + matrixArray[i - 1] * matrixArray[k] * matrixArray[j];
+                if (temp > value) {
+                    temp = value;
+                }
+            }
+            dp[i][j] = temp;
+        }
+    }
+    console.log("dddd->", dp)
 }
