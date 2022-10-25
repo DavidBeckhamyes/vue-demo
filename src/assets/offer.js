@@ -406,25 +406,37 @@ var LCS = function (s1, s2) {
 }
 
 var matrixChain = function () {
-    const matrixArray = [30, 35, 15, 5, 10, 20, 25];
-    const dp = new Array(matrixArray.length).fill(999999).map((x) => new Array(matrixArray.length).fill(999999));
-
-    for (let i = 1; i <= matrixArray.length - 1; i++) {
-        for (let j = 1; j <= i; j++) {
-            dp[i][j] = 0;
-        }
-    }
-    for (let i = 1; i <= matrixArray.length - 1; i++) {
-        for (let j = i + 1; j <= matrixArray.length - 1; j++) {
-            let temp = dp[i][j];
+    const matrixArray = [30, 35, 15, 5, 10, 20, 25];  // 矩阵规模数组
+    let matrixNum = matrixArray.length - 1;  // 矩阵数量
+    const trace = new Array(matrixNum).fill(0).map((x) => new Array(matrixNum).fill(0));  // 初始化连乘代价矩阵
+    const dp = new Array(matrixNum).fill(-1).map((x) => new Array(matrixNum).fill(-1));
+    for (let i = 0; i < matrixNum; i++) dp[i][i] = 0; // 对角线初始化为0 表示1个矩阵的乘法次数为0
+    for (let n = 1; n < matrixNum; n++) {  // 表示遍历矩阵的规模 从两个矩阵的乘法到6个矩阵的乘法规模次数为5
+        for (let i = 0; i < matrixNum - n; i++) {  // 表示矩阵连乘的组合种类(e.g.2个矩阵连乘有5种组合)
+            let j = i + n;
             for (let k = i; k < j; k++) {
-                let value = dp[i][k] + dp[k + 1][j] + matrixArray[i - 1] * matrixArray[k] * matrixArray[j];
-                if (temp > value) {
-                    temp = value;
+                const tempCost = dp[i][k] + dp[k + 1][j] + matrixArray[i] * matrixArray[k + 1] * matrixArray[j + 1];
+                if (dp[i][j] == -1 || dp[i][j] > tempCost) {
+                    dp[i][j] = tempCost;
+                    trace[i][j] = k;
                 }
             }
-            dp[i][j] = temp;
         }
     }
-    console.log("dddd->", dp)
+
+    let result = "";
+    var Traceback = function (i, j) {
+        if (i == j) {
+            result += "A" + i;
+        } else {
+            result += "(";
+            Traceback(i, trace[i][j]);
+            Traceback(trace[i][j] + 1, j);
+            result += ")";
+        }
+    }
+
+    Traceback(0, matrixNum - 1);
+    console.log("最大阶乘组合为:", result)
+    console.log("矩阵连乘乘法代价矩阵为:", dp)
 }
