@@ -1,25 +1,39 @@
 <template>
-  <div>
-    <h2>x: {{ x }}, y: {{ y }}</h2>
-  </div>
+  <h2>{{ state }}</h2>
+  <button @click="testToRaw">测试toRaw</button>
+  <button @click="testMarkRaw">测试markRaw</button>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script lang="ts">
 /*
-在组件中引入并使用自定义hook
-自定义hook的作用类似于vue2中的mixin技术
-自定义Hook的优势: 很清楚复用功能代码的来源, 更清楚易懂
+toRaw: 得到reactive代理对象的目标数据对象(还原)
 */
-import useMousePosition from "./hooks/useMousePosition";
-
+import { defineComponent, markRaw, reactive, toRaw } from "vue";
 export default defineComponent({
   setup() {
-    const { x, y } = useMousePosition();
+    const state = reactive<any>({
+      name: "tom",
+      age: 25,
+    });
+
+    const testToRaw = () => {
+      const user = toRaw(state);
+      user.age++; // 界面不会更新
+    };
+
+    const testMarkRaw = () => {
+      const likes = ["a", "b"];
+      // state.likes = likes
+      state.likes = markRaw(likes); // likes数组就不再是响应式的了
+      setTimeout(() => {
+        state.likes[0] += "--";
+      }, 1000);
+    };
 
     return {
-      x,
-      y,
+      state,
+      testToRaw,
+      testMarkRaw,
     };
   },
 });
