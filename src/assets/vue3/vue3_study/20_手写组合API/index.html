@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写组合API</title>
+</head>
+
+<body>
+    <script src="./index.js"></script>
+    <script type="text/javascript">
+        const proxyUser1 = shallowReactive({
+            name: "小米",
+            age: 18,
+            wife: {
+                name: "大佬",
+                gender: '男'
+            }
+        })
+        const proxyUser2 = reactive({
+            name: "小米",
+            age: 18,
+            wife: {
+                name: "大佬",
+                gender: '男'
+            }
+        })
+        proxyUser2.name += '哈哈';
+        delete proxyUser2.wife.name;
+
+        /* 测试自定义readonly */
+        /* 测试自定义shallowReadonly */
+        const objReadOnly = readonly({
+            a: {
+                b: 1
+            }
+        })
+        const objReadOnly2 = shallowReadonly({
+            a: {
+                b: 1
+            }
+        })
+
+        objReadOnly.a = 1
+        objReadOnly.a.b = 2
+        objReadOnly2.a = 1
+        objReadOnly2.a.b = 2
+
+
+
+        /* 测试自定义shallowRef */
+        const ref3 = shallowRef({
+            a: 'abc'
+        })
+        ref3.value = 'xxx'
+        ref3.value.a = 'yyy'
+
+        /* 测试自定义ref */
+        const ref1 = ref(0)
+        const ref2 = ref({
+            a: 'abc',
+            b: [{ x: 1 }],
+            c: { x: [11] }
+        })
+        ref1.value++
+        ref2.value.b[0].x++
+        console.log(ref1, ref2)
+
+
+
+        /* 测试判断函数 */
+        console.log(isReactive(reactive({})))
+        console.log(isRef(ref({})))
+        console.log(isReadonly(readonly({})))
+        console.log(isProxy(reactive({})))
+        console.log(isProxy(readonly({})))
+    </script>
+</body>
+
+</html>

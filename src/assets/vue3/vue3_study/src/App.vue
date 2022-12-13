@@ -1,30 +1,34 @@
 <template>
-  <h2>响应式数据的判断</h2>
+  <!-- 它们允许我们的应用程序在等待异步组件时渲染一些后备内容，可以让我们创建一个平滑的用户体验 -->
+
+  <Suspense>
+    <template v-slot:default>
+      <!-- <AsyncComp /> -->
+      <AsyncAddress />
+    </template>
+
+    <template v-slot:fallback>
+      <h1>LOADING...</h1>
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  isRef,
-  reactive,
-  isReactive,
-  readonly,
-  isReadonly,
-  isProxy,
-} from "vue";
+/*
+异步组件 + Suspense组件
+*/
+import AsyncAddress from "./components/AsyncAddress.vue";
+import { defineComponent, defineAsyncComponent } from "vue";
+// const AsyncComp = defineAsyncComponent(
+//   () => import("./components/AsyncComp.vue")
+// );
 export default defineComponent({
-  name: "App",
   setup() {
-    // isRef: 检查一个值是否为一个 ref 对象
-    console.log(isRef(ref({})));
-    // isReactive: 检查一个对象是否是由 reactive 创建的响应式代理
-    console.log(isReactive(reactive({})));
-    // isReadonly: 检查一个对象是否是由 readonly 创建的只读代理
-    console.log(isReadonly(readonly({})));
-    // isProxy: 检查一个对象是否是由 reactive 或者 readonly 方法创建的代理
-    console.log(isProxy(reactive({})));
     return {};
+  },
+
+  components: {
+    AsyncAddress,
   },
 });
 </script>
