@@ -1,19 +1,21 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header />
-      <List />
+      <Header :addTodo="addTodo" />
+      <List :todos="todos" :deleteTodo="deleteTodo" />
       <Footer />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 // 引入直接的子级组件
 import Header from "./components/Header.vue";
 import List from "./components/List.vue";
 import Footer from "./components/Footer.vue";
+import { Todo } from "./types/todo";
+
 export default defineComponent({
   // 注册组件
   components: {
@@ -21,8 +23,31 @@ export default defineComponent({
     List,
     Footer,
   },
+  // 数据应该用数组来存储,数组中的每个数据都是一个对象,对象中应该有三个属性(id,title,isCompleted)
+  // 把数组暂且定义在App.vue父级组件
   setup() {
-    return {};
+    // 定义一个数组数据
+    const state = reactive<{ todos: Todo[] }>({
+      todos: [
+        { id: 1, title: "奔驰", isCompleted: false },
+        { id: 2, title: "宝马", isCompleted: true },
+        { id: 3, title: "奥迪", isCompleted: false },
+      ],
+    });
+
+    // 添加数据的方法
+    const addTodo = (todo: Todo) => {
+      state.todos.unshift(todo);
+    };
+    // 删除数据的方法
+    const deleteTodo = (index: number) => {
+      state.todos.splice(index, 1);
+    }
+    return {
+      ...toRefs(state),
+      addTodo,
+      deleteTodo
+    };
   },
 });
 </script>

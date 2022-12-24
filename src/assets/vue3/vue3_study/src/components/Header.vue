@@ -1,15 +1,48 @@
 <template>
   <div class="todo-header">
-    <input type="text" placeholder="请输入你的任务名称，按回车键确认" />
+    <input
+      type="text"
+      v-model="title"
+      @keyup.enter="add"
+      placeholder="请输入你的任务名称，按回车键确认"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "Header",
-  setup() {
-    return {};
+  props: {
+    addTodo: {
+      type: Function,
+      required: true, // 必须
+    },
+  },
+  setup(props) {
+    // 定义一个ref类型的数据
+    const title = ref("");
+
+    // 回车的事件的回调函数,用来添加数据
+    const add = () => {
+      // 获取文本框中输入的数据,判断不为空
+      const text = title.value;
+      if (!text.trim()) return;
+      // 此时有数据,创建一个todo对象
+      const todo = {
+        id: Date.now(),
+        title: text,
+        isCompleted: false,
+      };
+      // 调用props方法addTodo
+      props.addTodo(todo);
+      // 清空文本框
+      title.value = '';
+    };
+    return {
+      add,
+      title
+    };
   },
 });
 </script>
