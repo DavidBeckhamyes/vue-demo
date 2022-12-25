@@ -2,8 +2,12 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <Header :addTodo="addTodo" />
-      <List :todos="todos" :deleteTodo="deleteTodo" />
-      <Footer />
+      <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo" />
+      <Footer
+        :todos="todos"
+        :checkAll="checkAll"
+        :clearAllCompletedTodos="clearAllCompletedTodos"
+      />
     </div>
   </div>
 </template>
@@ -39,14 +43,35 @@ export default defineComponent({
     const addTodo = (todo: Todo) => {
       state.todos.unshift(todo);
     };
+
     // 删除数据的方法
     const deleteTodo = (index: number) => {
       state.todos.splice(index, 1);
-    }
+    };
+
+    // 修改todo的isCompleted属性的状态
+    const updateTodo = (todo: Todo, isCompleted: boolean) => {
+      todo.isCompleted = isCompleted;
+      console.log(todo);
+    };
+
+    // 全选或者是全不选的方法
+    const checkAll = (isCompleted: boolean) => {
+      // 遍历数组
+      state.todos.forEach((todo) => (todo.isCompleted = isCompleted));
+    };
+
+    // 清理所有选中的数据
+    const clearAllCompletedTodos = () => {
+      state.todos = state.todos.filter((todo) => !todo.isCompleted);
+    };
     return {
       ...toRefs(state),
       addTodo,
-      deleteTodo
+      deleteTodo,
+      updateTodo,
+      checkAll,
+      clearAllCompletedTodos,
     };
   },
 });
