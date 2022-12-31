@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>初识Canvas</title>
+    <title>矩形绘制-路径模式</title>
 </head>
 
 <body>
     <!-- id:元素标识唯一性
     width:画布的宽度
     height:画布的高度 -->
-    <!-- style里面改变的是图片大小,仅仅用于放缩图片,width和height设置的是像素密度,不会随着图片放缩而变化 -->
-    <canvas id="c1" width="600" height="400">
+    <!-- 通过CSS设置Canvas大小时，只对Canvas元素本身的大小进行设置，而没有对元素绘图表面大小进行设置，所以元素绘图表面是默认大小300x150像素。当Canvas元素本身大小与元素绘图表面不一样时，浏览器会对元素绘图表面进行缩放，使其符合元素大小。 -->
+    <canvas id="c1" width="600" height="400" style="height: 200px; width: 300px;">
         当前浏览器不支持canvas，请下载最新的浏览器
     </canvas>
 
