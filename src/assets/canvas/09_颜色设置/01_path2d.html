@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>path2d</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas，请下载最新的浏览器
+    </canvas>
+
+    <script>
+        // 1、找到画布
+        let c1 = document.getElementById("c1");
+
+        // 判断是否有getContext
+        if (!c1.getContext) {
+            console.log("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+
+        // 设置全局透明度
+        ctx.globalAlpha = 0.5;
+
+        // 封装“爱心”路径
+        let heartPath = new Path2D();
+
+        heartPath.moveTo(300, 150);
+
+        heartPath.bezierCurveTo(350, 100, 450, 150, 300, 250);
+        heartPath.bezierCurveTo(150, 150, 250, 100, 300, 150);
+
+        ctx.strokeStyle = "red";
+        ctx.stroke(heartPath);
+
+        // 封装聊天框路径
+        let chatPath = new Path2D();
+        chatPath.moveTo(200, 300);
+        chatPath.quadraticCurveTo(150, 300, 150, 200);
+        chatPath.quadraticCurveTo(150, 100, 300, 100);
+        chatPath.quadraticCurveTo(450, 100, 450, 200);
+        chatPath.quadraticCurveTo(450, 300, 250, 300);
+        chatPath.quadraticCurveTo(250, 350, 150, 350);
+        chatPath.quadraticCurveTo(200, 350, 200, 300);
+
+        ctx.strokeStyle = "#ff00ff";
+        ctx.stroke(chatPath);
+
+        ctx.fillStyle = "rgba(255,200,200,0.3)";
+        ctx.fill(heartPath);
+
+        // 创建一条折线
+        // svg字符串写法(m:moveTo;h:水平移动;v:垂直移动;z:回到原点);
+        let polyLine = new Path2D("m10 10 h 80 v 80 h -80 z");
+        ctx.strokeStyle = "rgba(0,0,255)";
+        ctx.stroke(polyLine);
+
+        ctx.fillStyle = "rgba(200,200,255,1)";
+        ctx.fillRect(280, 130, 40, 40);
+    </script>
+</body>
+
+</html>

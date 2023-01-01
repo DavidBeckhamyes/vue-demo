@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线型渐变</title>
+</head>
+
+<body>
+    <!-- id:元素标识唯一性
+    width:画布的宽度
+    height:画布的高度 -->
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas，请下载最新的浏览器
+    </canvas>
+
+    <script>
+        // 1、找到画布
+        let c1 = document.getElementById("c1");
+
+        // 判断是否有getContext
+        if (!c1.getContext) {
+            console.log("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+
+        let index = 0;
+        function render() {
+            index += 0.01;
+            if (index > 1) {
+                index = 0
+            }
+            // createLinearGradient(x1,y1,x2,y2) - 创建线条渐变
+            // 本例是以(100,200)–>(400,600)渐变。
+            let linearGradient = ctx.createLinearGradient(100, 200, 400, 600);
+            // addColorStop(index,color)方法指定颜色停止，参数使用index来描述，index范围在0-1之间，0.5即给定横纵坐标的50%
+            linearGradient.addColorStop(0, "red");
+            linearGradient.addColorStop(index, "#ffcccc");
+            linearGradient.addColorStop(1, "blue");
+            ctx.fillStyle = linearGradient;
+            ctx.fillRect(100, 200, 300, 400);
+            requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
+    </script>
+</body>
+
+</html>
