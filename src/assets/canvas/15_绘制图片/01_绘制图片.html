@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘制图片</title>
+</head>
+
+<body>
+    <!-- id:元素标识唯一性
+    width:画布的宽度
+    height:画布的高度 -->
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas，请下载最新的浏览器
+    </canvas>
+
+    <script>
+        // 1、找到画布
+        let c1 = document.getElementById("c1");
+
+        // 判断是否有getContext
+        if (!c1.getContext) {
+            console.log("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+
+        // 3、获取图片
+        let img = new Image();
+        img.src = "../../timg.jpg";
+
+        img.onload = function () {
+            // 第一种绘制图片的方式,参数1为图片对象,参数2为图片渲染到画布的水平位置,参数3为图片渲染到画布的垂直位置
+            // ctx.drawImage(img, 0, 0);
+            // 第二种绘制图片方式,前三个参数同上,参数4将图片缩放到对应的宽度,参数5将图片缩放到对应的高度
+            // ctx.drawImage(img, 0, 0, 600, 400);
+            // 第三种绘制图片的方式,img参数后面的四个参数分别为原图片上面需要裁剪的起点位置和矩形的宽高,后面四个参数分别为画布的位置和要渲染的矩形宽高
+            ctx.drawImage(img, 256, 0, 512, 768, 0, 0, 600, 400);
+        }
+    </script>
+</body>
+
+</html>

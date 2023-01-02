@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现刮刮卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        #ggk {
+            width: 600px;
+            height: 400px;
+            font-size: 30px;
+            font-weight: 900;
+            text-align: center;
+            line-height: 400px;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ggk">谢谢惠顾</div>
+    <!-- id:元素标识唯一性
+    width:画布的宽度
+    height:画布的高度 -->
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas，请下载最新的浏览器
+    </canvas>
+
+    <script>
+        // 1、找到画布
+        let c1 = document.getElementById("c1");
+
+        // 判断是否有getContext
+        if (!c1.getContext) {
+            console.log("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+        // 3、绘制图形
+        let img = new Image();
+        img.src = "../../didi.jpg";
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0, 600, 400);
+        }
+
+        let isDraw = false;  // 是否可刮
+        c1.onmousedown = function () {
+            isDraw = true;  // 鼠标点击可刮
+        }
+        c1.onmouseup = function () {
+            isDraw = false;  // 鼠标抬起不可刮
+        }
+        c1.onmousemove = function (event) {
+            if (isDraw) {
+                let x = event.x;
+                let y = event.y;
+
+                // 设置图像重叠部分不显示,其他部分展示
+                ctx.globalCompositeOperation = "destination-out";
+                ctx.beginPath();
+                ctx.arc(x, y, 30, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+        let random = Math.random();
+        if (random < 0.1) {
+            let ggkDiv = document.querySelector('#ggk');
+            ggkDiv.innerHTML = "恭喜您获得Iphone14!"
+        }
+    </script>
+</body>
+
+</html>
