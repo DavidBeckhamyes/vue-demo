@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线条样式</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas，请下载最新的浏览器
+    </canvas>
+
+    <script>
+        // 1、找到画布
+        let c1 = document.getElementById("c1");
+
+        // 判断是否有getContext
+        if (!c1.getContext) {
+            console.log("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+
+        ctx.moveTo(290, 150);
+        ctx.lineTo(300, 200);
+        ctx.lineTo(310, 150);
+
+        // 设置线条样式,默认1px
+        ctx.lineWidth = 40;
+        // 设置线条端点样式,butt平齐,round半圆,square正方形
+        ctx.lineCap = "round";
+        // 设置2个线段连接处的样式,mitter外侧相连的角,round角被磨圆了,bevel角度被磨平了
+        ctx.lineJoin = "mitter";
+        // 对斜接面进行限制
+        ctx.mitterLimit = 5;
+        ctx.stroke();
+    </script>
+</body>
+
+</html>
