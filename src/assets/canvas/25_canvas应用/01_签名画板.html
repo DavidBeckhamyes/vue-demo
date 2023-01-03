@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>签名画板</title>
+    <style>
+        button.active {
+            color: #fff;
+            background-color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- id:元素标识唯一性
+    width:画布的宽度
+    height:画布的高度 -->
+    <canvas id="c1" width="800" height="600">
+        当前浏览器不支持canvas，请下载最新的浏览器
+    </canvas>
+    <hr />
+    <button id="boldBtn" type="button">粗线条</button>
+    <button id="thinBtn" type="button">细线条</button>
+    <button id="saveBtn" type="button">保存签名</button>
+    <input type="color" name="" id="color" value="" />
+    <button class="clearBtn">橡皮擦</button>
+    <button id="nullBtn">清空画布</button>
+
+    <script>
+        // 1、找到画布
+        let c1 = document.getElementById("c1");
+
+        // 判断是否有getContext
+        if (!c1.getContext) {
+            console.log("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+
+        // 设置连接点圆滑
+        ctx.lineJoin = 'round';
+
+        // 开端和结束端也是圆滑的
+        ctx.lineCap = 'round';
+
+        // 获取输入框和按钮
+        // 设置画笔的粗细
+        let boldBtn = document.querySelector('#boldBtn');
+        let thinBtn = document.querySelector('#thinBtn');
+        // 保存签名
+        let saveBtn = document.querySelector('#saveBtn');
+        // 橡皮擦按钮
+        let clearBtn = document.querySelector('.clearBtn');
+        // 清空画布
+        let nullBtn = document.querySelector('#nullBtn');
+
+        // 设置允许绘制的变量
+        let isDraw = false;
+
+        // 鼠标点击
+        c1.onmousedown = function (event) {
+            isDraw = true;
+            ctx.beginPath();
+            let x = event.pageX - c1.offsetLeft;
+            let y = event.pageY - c1.offsetTop;
+            ctx.moveTo(x, y);
+        }
+        // 鼠标离开
+        c1.onmouseleave = function () {
+            isDraw = false;
+            ctx.closePath();
+        }
+        // 鼠标抬起
+        c1.onmouseup = function () {
+            isDraw = false;
+            ctx.closePath();
+        }
+        c1.onmousemove = function (event) {
+            if (isDraw) {
+                let x = event.pageX - c1.offsetLeft;
+                let y = event.pageY - c1.offsetTop;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            }
+        }
+
+        // 点击线条加粗按钮,并设置点击样式
+        boldBtn.onclick = function () {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.lineWidth = 20;
+            boldBtn.classList.add('active');
+            thinBtn.classList.remove('active');
+            clearBtn.classList.remove('active');
+        }
+
+        // 点击线条加细按钮,并设置点击样式
+        thinBtn.onclick = function () {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.lineWidth = 2;
+            thinBtn.classList.add('active');
+            boldBtn.classList.remove('active');
+            clearBtn.classList.remove('active');
+        }
+
+        clearBtn.onclick = function () {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.lineWidth = 30;
+            clearBtn.classList.add('active');
+            boldBtn.classList.remove('active');
+            thinBtn.classList.remove('active');
+        }
+
+        // 清空画布
+        nullBtn.onclick = function () {
+            ctx.clearRect(0, 0, 800, 600);
+        }
+
+        // 保存签名
+        saveBtn.onclick = function () {
+            // 保存到图片
+            let urlData = c1.toDataURL();
+            // let img = new Image();
+            // img.src = urlData;
+            // document.body.appendChild(img);
+
+            let downloadA = document.createElement('a');
+            downloadA.setAttribute('download', '酷炫签名');
+            downloadA.href = urlData;
+            downloadA.click();
+        }
+
+        let inputColor = document.querySelector('#color');
+        inputColor.onchange = function () {
+            ctx.strokeStyle = inputColor.value;
+        }
+    </script>
+</body>
+
+</html>

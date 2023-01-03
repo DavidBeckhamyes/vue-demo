@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装爱心模块</title>
+</head>
+
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas，请下载最新的浏览器
+    </canvas>
+
+    <script>
+        // 1、找到画布
+        let c1 = document.getElementById("c1");
+
+        // 判断是否有getContext
+        if (!c1.getContext) {
+            console.log("当前浏览器不支持canvas，请下载最新的浏览器");
+        }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+
+        class Heart {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.heartPath = new Path2D();
+                this.color = "red";
+                // 事件列表
+                this.eventMapList = {
+                    hover: [],
+                    leave: []
+                }
+
+                c1.onmousemove = (event) => {
+                    let x = event.offsetX;
+                    let y = event.offsetY;
+
+                    // 判断鼠标位置是否在绘制的元素上(注意此处不用箭头函数,取不到this)
+                    let isIn = ctx.isPointInPath(this.heartPath, x, y);
+                    if (isIn) {
+                        this.eventMapList.hover.forEach(item => item());
+                    } else {
+                        this.eventMapList.leave.forEach(item => item());
+                    }
+                }
+            }
+            onHover(fn) {
+                this.eventMapList.hover.push(fn);
+            }
+            onLeave(fn) {
+                this.eventMapList.leave.push(fn);
+            }
+            draw() {
+                // 爱心起点
+                this.heartPath.moveTo(this.x, this.y);
+                this.heartPath.bezierCurveTo(this.x + 50, this.y - 50, this.x + 150, this.y, this.x, this.x);
+                this.heartPath.bezierCurveTo(this.x - 150, this.y, this.x - 50, this.y - 50, this.x, this.y);
+
+                ctx.save();
+                ctx.fillStyle = this.color;
+                ctx.fill(this.heartPath);
+                ctx.restore();
+            }
+        }
+
+        let heart = new Heart(300, 200);
+        heart.onHover(() => {
+            heart.color = "blue";  // 绑定一个hover事件
+        })
+        heart.onLeave(() => {
+            heart.color = "red";  // 绑定一个hover事件
+        })
+        function render() {
+            ctx.clearRect(0, 0, c1.width, c1.height);
+            heart.draw();
+            requestAnimationFrame(render);
+        }
+        render()
+    </script>
+</body>
+
+</html>
