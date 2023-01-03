@@ -18,7 +18,7 @@
     <!-- id:元素标识唯一性
     width:画布的宽度
     height:画布的高度 -->
-    <canvas id="c1" width="800" height="600">
+    <canvas id="c1" width="600" height="400">
         当前浏览器不支持canvas，请下载最新的浏览器
     </canvas>
     <hr />
@@ -125,9 +125,12 @@
             let urlData = c1.toDataURL();
             // let img = new Image();
             // img.src = urlData;
+            // 画布下方创建一个图片存储区域
             // document.body.appendChild(img);
 
+            // 创建一个a标签
             let downloadA = document.createElement('a');
+            // 设置标签下载属性并命名下载内容
             downloadA.setAttribute('download', '酷炫签名');
             downloadA.href = urlData;
             downloadA.click();
