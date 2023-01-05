@@ -27,13 +27,7 @@
 
         // 2、获取画笔，上下文对象
         let ctx = c1.getContext("2d");
-        let index = 0;
         function render() {
-            console.log("哈哈哈");
-            index += 1;
-            if (index > 5) {
-                cancelAnimationFrame(render)
-            }
             ctx.clearRect(0, 0, 800, 600);
 
             // 存档,保存当前坐标位置和上下文对象的状态
