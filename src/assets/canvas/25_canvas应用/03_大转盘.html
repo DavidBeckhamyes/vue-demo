@@ -6,6 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>大转盘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            position: absolute;
+            left: 225px;
+            top: 170px;
+            z-index: 2;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,6 +28,7 @@
     <canvas id="c1" width="500" height="400">
         当前浏览器不支持canvas，请下载最新的浏览器
     </canvas>
+    <img class="button" src="../../pointer.png" width="51" height="63" alt="">
 
     <script>
         // 1、找到画布
@@ -24,6 +38,10 @@
         if (!c1.getContext) {
             console.log("当前浏览器不支持canvas，请下载最新的浏览器");
         }
+
+        // 2、获取画笔，上下文对象
+        let ctx = c1.getContext("2d");
+
 
         // 1、 绘制出转盘 以stuList为数据 将其添加到转盘当中  平均每个一份 颜色随机
         var stuList = ["一等奖", "二等奖", "三等奖", "四等奖", "特等奖", "参与奖", "谢谢", "再来一次", "一等奖", "二等奖", "三等奖", "四等奖", "特等奖", "参与奖", "谢谢", "再来一次"];
@@ -37,6 +55,54 @@
             var g = randNum(min, max);
             var b = randNum(min, max);
             return `rgb(${r},${g},${b})`;
+        }
+
+        //console.log(randColor(180,230));
+        ctx.translate(250, 200); //将圆心位置移动到canvas的中心
+        // 将圆盘0的位置 转到箭头指向的地方
+        ctx.rotate(Math.PI / 180 * -(90 + 360 / stuList.length));
+
+
+        /*绘制出所有的小扇形*/
+        for (var i = 0; i < stuList.length; i++) {
+            ctx.rotate(Math.PI / 180 * 360 / stuList.length); // 保证先填充内容颜色,再填充字体
+
+            ctx.beginPath();
+
+            ctx.arc(0, 0, 180, 0, Math.PI / 180 * (360 / stuList.length));
+            ctx.lineTo(0, 0);
+
+            ctx.fillStyle = randColor(100, 200);
+            ctx.fill();
+
+            var txt = stuList[i];
+            ctx.fillStyle = "#333";
+            ctx.font = "20px 'Microsoft YaHei'";
+            ctx.fillText(txt, 100, 30);
+            ctx.closePath();
+        }
+
+        var btn = document.querySelector(".button");
+        btn.onclick = function () {
+            //点击添加过渡
+            c1.style.transition = "all 6s";
+            //随机一个数字 
+            var num = randNum(0, 1000) + 1000;
+            //添加到canvas 使其旋转
+            c1.style.transform = "rotate(" + -num + "deg)";
+            //计算 现在指向是谁
+            var student = parseInt(num % 360 / (360 / stuList.length));
+
+
+            console.log(student)
+
+            /*一次性定时器  也叫延时器*/
+            setTimeout(function () {
+                alert("恭喜您获得" + stuList[student]);
+                //6.5s后转会原来的位置 但是 不可以有过渡效果
+                c1.style.transition = "none";
+                c1.style.transform = "rotate(0deg)";
+            }, 6500)
         }
     </script>
 </body>
