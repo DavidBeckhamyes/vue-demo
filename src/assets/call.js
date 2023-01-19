@@ -15,7 +15,7 @@ var egg = {
 
 Function.prototype.newCall = function (obj) {
     var obj = obj || window;  // 处理对象为null的情况
-    obj.p = this;
+    obj.p = this; // 这里的this指向的是Person方法,原因为隐式绑定
     console.log('函数中生成的参数数组是:', arguments);
     const newArguments = [];
     for (var i = 1; i < arguments.length; i++) {
