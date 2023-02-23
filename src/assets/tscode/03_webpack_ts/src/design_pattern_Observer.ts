@@ -7,6 +7,8 @@
         notify(): void;  // 状态改变后，通知所有观察者
         setState(state: string): void;  // 设置新状态
         getState(): string;  // 获取当前状态
+        getName(): string; // 获取up姓名
+        showFuns(): void;  // 展示粉丝
     }
 
     // 具体的观察目标(up主)
@@ -37,6 +39,15 @@
         }
         getState(): string {
             return this.state;
+        }
+        getName(): string {
+            return this.name;
+        }
+        showFuns(): void {
+            console.log(this.name + "的粉丝有:")
+            for (const observer of this.observerList) {
+                console.log(observer.getName());
+            }
         }
     }
 
@@ -70,11 +81,21 @@
             this.state = this.subject.getState();  // 更改当前粉丝状态为up修改后的状态
             console.log(this.name + "修改后的状态为:", this.state);
         }
+
+        // 粉丝取关up主
+        unFollow(): void {
+            console.log(this.name + "取关了" + this.subject.getName());
+            this.subject.detach(this);
+        }
     }
     // 设置up主
     const sansong = new ConcreteSubject();
     const observer1 = new ConcreteObserver("张三", sansong);
     const observer2 = new ConcreteObserver("李四", sansong);
     const observer3 = new ConcreteObserver("王五", sansong);
+
     sansong.setState("爷更新啦!!")
+    // 粉丝取关
+    observer3.unFollow();
+    sansong.showFuns();
 })()
