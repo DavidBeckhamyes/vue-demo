@@ -28,6 +28,7 @@
         // 2、获取画笔，上下文对象
         let ctx = c1.getContext("2d");
 
+        //圆锥渐变createConicGradient(角度，位置X，位置Y) 角度为顺时针
         let coneGradient = ctx.createConicGradient(Math.PI / 4, 300, 200);
 
         coneGradient.addColorStop(0, "red");
