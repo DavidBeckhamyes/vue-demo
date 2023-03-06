@@ -42,12 +42,14 @@
 
             for (let i = 0; i < 12; i++) {
                 // 绘制小时的刻度
+                ctx.beginPath();
                 ctx.moveTo(170, 0);
                 ctx.lineTo(190, 0);
                 ctx.lineWidth = 8;
                 ctx.strokeStyle = 'gray';
                 ctx.stroke();
                 ctx.rotate(2 * Math.PI / 12);
+                ctx.closePath();
             }
 
             for (let i = 0; i < 60; i++) {
