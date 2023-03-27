@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="getBtn">GET</button>
+    <button id="postBtn">POST</button>
+    <button id="jsonpBtn">JSONP</button>
+    <script>
+        $(function () {
+            // 1.测试GET请求
+            $('#getBtn').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://127.0.0.1/api/get',
+                    data: {
+                        name: 'zs',
+                        age: 20
+                    },
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
+            })
+            // 2.测试POST请求
+            $('#postBtn').on('click', function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1/api/post',
+                    data: {
+                        bookName: '水浒传',
+                        author: '施耐庵'
+                    },
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
+            })
+
+            $('#postBtn').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://127.0.0.1/api/jsonp',
+                    dataType: 'jsonp',  // 表示要发起 jsonp 请求
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
