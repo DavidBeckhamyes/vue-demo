@@ -19,6 +19,7 @@
 */
 import AsyncAddress from "./components/AsyncAddress.vue";
 import { defineComponent, defineAsyncComponent } from "vue";
+// Vue3组件按需加载方式
 // const AsyncComp = defineAsyncComponent(
 //   () => import("./components/AsyncComp.vue")
 // );
