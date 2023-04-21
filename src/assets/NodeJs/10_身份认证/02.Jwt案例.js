@@ -44,12 +44,12 @@ app.post('/api/login', (req, res) => {
 
 // 这是一个有访问权限的 API 接口
 app.get('/admin/getinfo', (req, res) => {
-    // TODO_05：使用 req.user 获取用户信息，并使用 data 属性将用户信息发送给客户端
-    console.log(req.user)
+    // TODO_05：使用 req.auth 获取用户信息，并使用 data 属性将用户信息发送给客户端
+    console.log(req.auth)
     res.send({
         status: 200,
         message: '获取信息成功',
-        data: req.username,  // 要发送给客户端的用户信息
+        data: req.auth,  // 要发送给客户端的用户信息
     })
 })
 

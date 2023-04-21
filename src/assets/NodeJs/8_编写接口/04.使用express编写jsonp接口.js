@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 
 // 优先创建 JSONP 接口，【这个接口不会被处理成 CORS 接口】
+// JSONP 原理本质上是客户端通过 script 标签把调用函数的名字发送给服务器，服务器返回函数的调用，在调用期间将参数传入
 app.get('/api/jsonp', (req, res) => {
     // 1.获取客户端发送过来的回调函数的名字
     const functionName = req.query.callback;
