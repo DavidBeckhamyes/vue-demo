@@ -6,7 +6,7 @@ const router = express.Router()
 const userHandler = require('../router_handler/user')
 
 // 注册新用户
-router.post('/reguser', userHandler.regUser);
+router.post('/regiser', userHandler.regUser);
 
 // 登录
 router.post('/login', userHandler.login);
