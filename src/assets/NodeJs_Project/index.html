@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax上传</title>
+    <script src="https://cdn.staticfile.org/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>文件上传</h1>
+    <form id="f" enctype="multipart/form-data">
+        文章封面:<input type="file" name="cover_img"><br />
+        <input type="button" id="btn" value="提交">
+    </form>
+</body>
+
+<script>
+    $(function () {
+        $("#btn").on("click", function () {
+            const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJ3dyIsInBhc3N3b3JkIjoiIiwibmlja25hbWUiOm51bGwsImVtYWlsIjpudWxsLCJ1c2VyX3BpYyI6IiIsImlhdCI6MTY4MjQ5Nzg5NCwiZXhwIjoxNjgyNTMzODk0fQ.ELw8lSkImryFXiuo-sCIufWlR0iYaH4Kl_uA9KOooaE"
+            //使用FormData对象来提交整个表单，它支持文件的上传
+            var formData = new FormData(document.getElementById("f"));
+            //额外带来一些数据
+            formData.append("title", "明朝那些事儿");
+            formData.append("cate_id", 1);
+            formData.append("content", "大明王朝");
+            formData.append("state", "草稿");
+            //使用ajax提交
+            $.ajax({
+                type: "post",
+                url: 'http://127.0.0.1:3007/my/article/add',
+                beforeSend: function (request) {
+                    request.setRequestHeader("authorization", token);
+                },
+                data: formData,
+                processData: false,//告诉jquery不要去处理请求的数据格式
+                contentType: false,//告诉jquery不要设置请求头的类型
+                success: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        })
+    })
+</script>
+
+</html>
