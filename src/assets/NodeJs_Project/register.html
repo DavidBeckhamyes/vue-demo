@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        function register() {
+            var username = $("#name").val();
+            var password = $("#password").val();
+            $.ajax({
+                type: "post",
+                url: "http://127.0.0.1:3007/api/regiser",
+                data: { username, password },
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        alert("注册成功！");
+                        location.href = "login.html";
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        姓名：<input type="text" id="name" /> <br>
+        密码：<input type="password" id="password" /> <br>
+        <input type="button" value="确定" onclick="register()" />&nbsp;&nbsp;&nbsp;
+        <input type="reset" value="取消" />
+    </form>
+</body>
+
+</html>

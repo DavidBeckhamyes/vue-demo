@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        function login() {
+            // 获取用户名和密码
+            var name = $("#name").val();
+            var password = $("#password").val();
+            $.ajax({
+                url: "http://127.0.0.1:3007/api/login",
+                type: "post",
+                // data表示发送的数据
+                data: {
+                    username: name,
+                    password: password
+                },
+                // 定义发送请求的参数为用 & 连接起来的键值对的数据格式
+                contentType: "application/x-www-form-urlencoded",
+                //定义回调响应的数据格式为JSON字符串,该属性可以省略
+                dataType: "json",
+                //成功响应的结果
+                success: function (data) {
+                    console.log(data);
+                    // if (data != null) {
+                    //     location.href = "show.html";
+                    // }
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        姓名：<input type="text" id="name" /> <br>
+        密码：<input type="password" id="password" /><br>
+        <input type="button" value="确定" onclick="login()" />&nbsp;&nbsp;&nbsp;
+        <input type="reset" value="取消" />
+    </form>
+</body>
+
+</html>
