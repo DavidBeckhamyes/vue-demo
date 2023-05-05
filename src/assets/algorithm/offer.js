@@ -24,7 +24,7 @@ window.onload = function () {
     matrixChain();
 }
 
-// 找到数组中的重复元素
+// 找到数组中的重复元素(此方法仅限数组元素均为数字的情况)
 var findRepeatNumber = function (nums) {
     const result = Array(nums.length).fill(0);
     nums.forEach((num) => {
@@ -57,7 +57,7 @@ var reverse = function (x) {
     if (origin < 10) {
         return x
     }
-    var powNum = origin.toString().length - 1;
+    var powNum = origin.toString().length - 1;  // powNum 表示该数字的最高位可表示为 10 的幂次 e.g. 314 最高位为百位，可表示为 10 的平方
     var result = 0;
     var step = 0;
     for (i = powNum; i >= 0; i--) {
