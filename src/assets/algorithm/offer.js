@@ -76,6 +76,7 @@ var reverse = function (x) {
 };
 
 /**
+ * @description 三数之和(三个数字相加和为0)
  * @param {number[]} nums
  * @return {number[][]}
  */
@@ -83,19 +84,23 @@ var threeSum = function (nums) {
     if (nums.length < 3) {
         return []
     }
+    // 此时数组中的元素 全为 0
     var isZeroArray = !nums.some(item => item !== 0);
     if (isZeroArray) {
         return [[0, 0, 0]]
     }
+    // 数组升序排列
     nums.sort((a, b) => a - b)
     var length = nums.length;
     const result = []
     for (var i = 0; i < length - 2; i++) {
-        // 目标元素相同直接跳过
+        // 目标元素相同直接跳过(避免出现重复结果)
         if (i > 0 && nums[i] == nums[i - 1]) {
             continue
         }
+        // 将三数之和转变为两数之和的解法来遍历
         var target = 0 - nums[i];
+        // 此处采用双指针法，一头一尾遍历
         var start = i + 1;
         var end = length - 1;
         while (start < end) {
@@ -122,7 +127,7 @@ var threeSum = function (nums) {
     return result
 };
 
-// 最长子串
+// 最长子串(不含有重复字符的 最长子串 的长度)
 var lengthOfLongestSubstring = function (s) {
     var length = 0;
     const result = [];
@@ -138,6 +143,7 @@ var lengthOfLongestSubstring = function (s) {
             var position = longestString.indexOf(arr[i]);
             if (position != -1) {
                 result.push(longestString);
+                // 在原有子串上截掉开始位置和重复字符所在位置之间的部分
                 longestString = longestString.slice(position + 1, longestString.length);
             }
             longestString += arr[i];
@@ -157,6 +163,7 @@ var lengthOfLongestSubstring = function (s) {
 
 }
 
+// 最长回文子串(字符串的反序与原始字符串相同，则该字符串称为回文字符串)
 var longestPalindrome = function (s) {
     // 边界条件
     if (s.length < 2) {
