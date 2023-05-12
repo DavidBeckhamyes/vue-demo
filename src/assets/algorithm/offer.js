@@ -177,10 +177,12 @@ var longestPalindrome = function (s) {
         var result = arr[i];
         var start = i - 1;
         var end = i + 1;
+        // 先看 “基座” 部分是否由多个相同的字符组成
         while (start >= -1 && end < arr.length && arr[i] == arr[end]) {
             result = result + arr[end];
             end++;
         }
+        // 然后检查 “基座” 左右两侧的字符是否相同，如果相同则拼接到 “基座” 的左右两侧 并构成一个回文字符串
         while (start >= 0 && end < arr.length && arr[start] == arr[end]) {
             result = arr[start] + result + arr[end];
             start--;
@@ -219,7 +221,7 @@ var searchInsert = function (nums, target) {
 function InsertionSort(array) {
     let start = 0;  // 起始位置
     for (let i = start + 1; i < array.length; i++) {
-        let cursor = i;
+        let cursor = i; // 游标左侧的元素均为有序
         while (cursor - 1 >= 0 && array[cursor - 1] >= array[cursor]) {
             // 向左遍历 一直找到遍历元素小于 游标指向元素为止
             let tmpVar = array[cursor];
@@ -309,7 +311,7 @@ var maxSubSum = function (array, left, right) {
     let sum = 0;  // 初始化最大子段和为0
     if (left == right) {
         // 切分到只有一个数
-        if (array[left] < 0) {
+        if (array[left] < 0) {  // 依题干 序列中所有整数均为负整数时，其最大子段和为0
             sum = 0;
         } else {
             sum = array[left];
@@ -321,7 +323,8 @@ var maxSubSum = function (array, left, right) {
 
         let leftSum = 0;  // 当前左侧子段求和
         let s1 = 0;  // 左侧子段的最大和
-        for (let i = center; i >= 0; i--) {
+        // 以下为第三种情况 最大子段和是结合左子段和右子段的元素序列和
+        for (let i = center; i >= left; i--) {
             leftSum += array[i];
             if (s1 <= leftSum) {
                 s1 = leftSum
