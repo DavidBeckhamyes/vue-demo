@@ -351,6 +351,8 @@ var maxSubSum = function (array, left, right) {
     return sum;
 }
 
+
+// 从前 i 个物品中选，背包容量为 j 时的物品最大价值
 var zeroOnePackage = function (number, weight) {
     const w = [0, 1, 2, 3, 4];  // 物品重量数组
     const v = [0, 2, 4, 5, 6];  // 背包价值数组
@@ -378,6 +380,7 @@ var zeroOnePackage = function (number, weight) {
     console.log(maxValues[number][weight])
 }
 
+// 最长公共子序列(注：公共子序列不需要为连续)
 var LCS = function (s1, s2) {
     const charArray1 = s1.split('');
     const charArray2 = s2.split('');
@@ -387,12 +390,15 @@ var LCS = function (s1, s2) {
     for (let i = 1; i <= charArray1.length; i++) {
         for (let j = 1; j <= charArray2.length; j++) {
             if (charArray1[i - 1] == charArray2[j - 1]) {
-                array[i][j] = 1 + Math.max(array[i - 1][j], array[i][j - 1]);
+                // 若两个字符数组的尾字符相同，去掉各自数组的尾字符后，再继续查找剩余字符串的公共子序列
+                array[i][j] = 1 + array[i - 1][j - 1];
             } else {
+                // 若两个字符数组的尾字符不相同，去掉任意一数组的尾字符后，再继续查找剩余字符串的公共子序列(比较两种截取尾字符后公共子序列长度的最大值)
                 array[i][j] = Math.max(array[i - 1][j], array[i][j - 1]);
             }
         }
     }
+    // 此处为根据公共子序列最大长度数组 找出公共子序列具体内容
     let i = charArray1.length, j = charArray2.length;
     let stash = [];
     while (i - 1 >= 0 && j - 1 >= 0) {
@@ -401,6 +407,7 @@ var LCS = function (s1, s2) {
             i--;
             j--;
         } else {
+            // 从公共子序列长度值较大的方向查找
             if (array[i - 1][j] > array[i][j - 1]) {
                 i--;
             } else {
