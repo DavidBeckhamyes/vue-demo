@@ -428,7 +428,7 @@ var matrixChain = function () {
     const trace = new Array(matrixNum).fill(0).map((x) => new Array(matrixNum).fill(0));  // 初始化连乘代价矩阵
     const dp = new Array(matrixNum).fill(-1).map((x) => new Array(matrixNum).fill(-1));
     for (let i = 0; i < matrixNum; i++) dp[i][i] = 0; // 对角线初始化为0 表示1个矩阵的乘法次数为0
-    for (let n = 1; n < matrixNum; n++) {  // 表示遍历矩阵的规模 从两个矩阵的乘法到6个矩阵的乘法规模次数为5
+    for (let n = 1; n < matrixNum; n++) {  // 表示遍历矩阵的规模 从两个矩阵的乘法到6个矩阵的乘法 此例规模次数为5(类似于几个对角线)
         for (let i = 0; i < matrixNum - n; i++) {  // 表示矩阵连乘的组合种类(e.g.2个矩阵连乘有5种组合)
             let j = i + n;
             for (let k = i; k < j; k++) {
