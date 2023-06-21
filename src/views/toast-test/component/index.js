@@ -1,6 +1,7 @@
 import toast from "./toast";
 import Vue from "vue";
 
+// 使用基础 Vue 构造器，创建一个“子类”
 const toastConstructor = Vue.extend(toast);
 
 const showToast = function (msg, duration = 2000) {
@@ -14,6 +15,7 @@ const showToast = function (msg, duration = 2000) {
         }
     })
 
+    // 将挂载的Node添加到body中
     document.body.appendChild(toast.$el);
 
     setTimeout(() => {
