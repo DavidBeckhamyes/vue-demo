@@ -52,8 +52,8 @@ Function.prototype.newBind = function (obj) {
     // that保存好this对象(Person函数)
     var that = this;
     // Array.prototype.slice.call(arguments)能将具有length属性的对象(key值为数字)转成数组。
-    arr = Array.prototype.slice.call(arguments, 1);
-    o = function() {}
+    arr = Array.prototype.slice.call(arguments, 1),
+    o = function() {},
     newf = function () {
         var arr2 = Array.prototype.slice.call(arguments);
         arrSum = arr.concat(arr2);
