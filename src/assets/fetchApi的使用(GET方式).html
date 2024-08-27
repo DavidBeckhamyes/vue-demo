@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetchApi的使用(GETPOST方式)</title>
+</head>
+
+<body>
+    <button>点击获取单身狗图片</button>
+    <img src="" alt="">
+    <script>
+        const button = document.querySelector('button');
+        const img = document.querySelector('img');
+        button.addEventListener('click', () => {
+            fetch("https://dog.ceo/api/breeds/image/random").then(response => response.json()).then(data => img.src = data.message)
+        })
+    </script>
+</body>
+
+</html>
