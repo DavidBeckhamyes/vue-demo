@@ -8,10 +8,12 @@
 
 <div id="app">
     <!-- 1.修饰符lazy -->
+    <!-- 回车或者失去焦点后完成双向绑定 -->
     <input type="text" v-model.lazy="message">
     <h2>{{message}}</h2>
 
     <!-- 2.修饰符number -->
+    <!-- 防止数字类型被转换成字符串类型绑定到变量中 -->
     <input type="number" v-model.number="age">
     <h2>{{age}}--{{typeof age}}</h2>
 
