@@ -31,6 +31,7 @@
         // let含有块级作用域
         const btns = document.getElementsByTagName('button');
         for (let i = 0; i < btns.length; i++) {
+            // 回调函数先进入执行栈中等循环完成再被执行
             btns[i].addEventListener('click', function () {
                 console.log('第' + i + '个按钮被点击');
             })
