@@ -9,8 +9,10 @@
 <div id="app">
     <div @click="divClick">
         <!-- 1.stop修饰符的使用 -->
+        <!-- 作用：阻止事件冒泡 -->
         <button @click.stop="btnClick">按钮</button>
         <!-- 2.prevent修饰符的使用 -->
+        <!-- 作用：阻止默认事件 -->
         <form action="https://www.baidu.com">
             <input type="submit" value="提交" @click.prevent="submitClick">
         </form>
