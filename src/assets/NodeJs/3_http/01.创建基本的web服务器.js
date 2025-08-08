@@ -17,6 +17,7 @@ server.on('request', function (req, res) {
     res.end(str)
 })
 
+// 调用 server.listen(端口号, cb回调)方法 即可启动web服务器
 server.listen(8080, function () {
     console.log('server running at http://127.0.0.1:8080')
 })
