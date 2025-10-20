@@ -11,6 +11,8 @@ app.post('/user', (req, res) => {
 })
 
 app.get('/', (req, res) => {
+    // req.query 默认是一个空对象
+    // 客户端使用 ?name=zs&age=20 这种查询字符串形式，发送到服务器的参数
     // 通过 req.query 可以获取到客户端发送过来的查询参数
     console.log(req.query)
     res.send(req.query)
